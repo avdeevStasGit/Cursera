@@ -1,7 +1,6 @@
-# Cursera
-University Minnesota
+# Cursera. University Minnesota
 
-Специализация Software Testing and Automation
+Курсы по специализация Software Testing and Automation.
 
 After completing this course, you will have an understanding of the fundamental principles and processes of software testing. You will have actively created test cases and run them using an automated testing tool. You will being writing and recognizing good test cases, including input data and expected outcomes.
 
