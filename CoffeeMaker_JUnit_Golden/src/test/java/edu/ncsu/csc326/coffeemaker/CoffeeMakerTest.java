@@ -74,17 +74,23 @@ public class CoffeeMakerTest {
 
     @Test
     public void testAddInventory() throws InventoryException {
-        coffeeMaker.addInventory("5", "8", "7", "8");
+        coffeeMaker.addInventory("5", "8", "0", "8");
     }
-
+    //Если пользователь вводит буквенный символ, пользователю будет предложено ввести сумму повторно.
     @Test(expected = InventoryException.class)
     public void testAddInventoryException1() throws InventoryException {
         coffeeMaker.addInventory("4", "5", "asdf", "3");
     }
-
+    //Если пользователь выбирает отрицательное или не целое число, пользователю будет предложено ввести сумму повторно.
     @Test(expected = InventoryException.class)
     public void testAddInventoryException2() throws InventoryException {
         coffeeMaker.addInventory("4", "-5", "3", "3");
+    }
+
+    //Если пользователь выбирает отрицательное или не целое число, пользователю будет предложено ввести сумму повторно.
+    @Test(expected = InventoryException.class)
+    public void testAddInventoryException3() throws InventoryException {
+        coffeeMaker.addInventory("4", "5.0", "3", "3");
     }
     //--------------------------------------------------
     //testInventory
