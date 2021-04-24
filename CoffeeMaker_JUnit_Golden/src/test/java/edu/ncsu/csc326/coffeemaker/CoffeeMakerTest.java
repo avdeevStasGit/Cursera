@@ -1,5 +1,6 @@
 package edu.ncsu.csc326.coffeemaker;
 
+import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -68,7 +69,8 @@ public class CoffeeMakerTest {
     }
 
     @Test
-    public void addInventory() {
+    public void testAddInventory() throws InventoryException {
+        coffeeMaker.addInventory("5", "8", "7", "8");
     }
 
     @Test
