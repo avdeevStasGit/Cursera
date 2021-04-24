@@ -68,14 +68,33 @@ public class CoffeeMakerTest {
     public void editRecipe() {
     }
 
+    //--------------------------------------------------
+    //testInventory
+    //--------------------------------------------------
+
     @Test
     public void testAddInventory() throws InventoryException {
         coffeeMaker.addInventory("5", "8", "7", "8");
     }
 
+    @Test(expected = InventoryException.class)
+    public void testAddInventoryException1() throws InventoryException {
+        coffeeMaker.addInventory("4", "5", "asdf", "3");
+    }
+
+    @Test(expected = InventoryException.class)
+    public void testAddInventoryException2() throws InventoryException {
+        coffeeMaker.addInventory("4", "-5", "3", "3");
+    }
+    //--------------------------------------------------
+    //testInventory
+    //--------------------------------------------------
+
     @Test
     public void checkInventory() {
     }
+
+
 
     @Test
     public void makeCoffee() {
