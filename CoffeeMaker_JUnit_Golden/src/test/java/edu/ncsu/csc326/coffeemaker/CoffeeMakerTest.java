@@ -1,6 +1,7 @@
 package edu.ncsu.csc326.coffeemaker;
 
 import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
+import edu.ncsu.csc326.coffeemaker.exceptions.RecipeException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +48,10 @@ public class CoffeeMakerTest {
         recipe2.setAmtMilk("3");
         recipe2.setAmtSugar("1");
         recipe2.setPrice("100");
+    }
 
+    @Test
+    public void testAddRecipe() throws RecipeException {
         recipe3 = new Recipe();
         recipe3.setName("Hot Chocolate");
         recipe3.setAmtChocolate("4");
@@ -55,18 +59,24 @@ public class CoffeeMakerTest {
         recipe3.setAmtMilk("1");
         recipe3.setAmtSugar("1");
         recipe3.setPrice("65");
+
+        coffeeMaker.addRecipe(recipe3);
     }
 
     @Test
-    public void addRecipe() {
+    public void testDeleteRecipe1() {
     }
 
     @Test
-    public void deleteRecipe() {
+    public void testDeleteRecipe2(){
+        coffeeMaker.addRecipe(recipe1);
+        coffeeMaker.deleteRecipe(0);
+        Assert.assertNotSame(recipe1, coffeeMaker.getRecipes()[0]);
+        Assert.assertNull(coffeeMaker.getRecipes()[0]);
     }
 
     @Test
-    public void editRecipe() {
+    public void testEditRecipe() {
     }
 
     //--------------------------------------------------
@@ -146,7 +156,7 @@ public class CoffeeMakerTest {
 
     // пользователю будет показан список ингредиентов в кофеварке.
     @Test
-    public void checkInventory() {
+    public void testCheckInventory() {
         inventory.setMilk(10);
         inventory.setChocolate(10);
         inventory.setCoffee(10);
@@ -159,7 +169,7 @@ public class CoffeeMakerTest {
 
     //Когда мы делаем кофе, выбираем действующий рецепт и платим больше, чем стоимость кофе. Сдача 25.
     @Test
-    public void makeCoffee() {
+    public void testMakeCoffee() {
         coffeeMaker.addRecipe(recipe0);
         assertEquals(25, coffeeMaker.makeCoffee(0, 75));
 
@@ -168,7 +178,7 @@ public class CoffeeMakerTest {
     //Кофеварка проверит, достаточно ли ингредиентов в инвентаре для приготовления выбранного напитка.
     //Если запасов недостаточно для приготовления напитка, отобразится сообщение, деньги пользователя будут возвращены
     @Test
-    public void makeCoffee1() {
+    public void testMakeCoffee1() {
         inventory.setMilk(1);
         inventory.setChocolate(1);
         inventory.setCoffee(1);
@@ -180,6 +190,10 @@ public class CoffeeMakerTest {
     }
 
     @Test
-    public void getRecipes() {
+    public void testGetRecipes() {
+        coffeeMaker.addRecipe(recipe1);
+        Recipe[] recipes = new Recipe[3];
+        recipes[0] = recipe1;
+        Assert.assertArrayEquals(recipes ,coffeeMaker.getRecipes());
     }
 }
