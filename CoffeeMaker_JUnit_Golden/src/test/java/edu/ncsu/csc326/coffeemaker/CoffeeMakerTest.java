@@ -1,6 +1,7 @@
 package edu.ncsu.csc326.coffeemaker;
 
 import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -69,41 +70,113 @@ public class CoffeeMakerTest {
     }
 
     //--------------------------------------------------
-    //testInventory
+    //testInventoryStart
     //--------------------------------------------------
 
     @Test
     public void testAddInventory() throws InventoryException {
         coffeeMaker.addInventory("5", "8", "0", "8");
     }
+
     //Если пользователь вводит буквенный символ, пользователю будет предложено ввести сумму повторно.
     @Test(expected = InventoryException.class)
-    public void testAddInventoryException1() throws InventoryException {
+    public void testAddInventoryException11() throws InventoryException {
         coffeeMaker.addInventory("4", "5", "asdf", "3");
     }
+
+    @Test(expected = InventoryException.class)
+    public void testAddInventoryException12() throws InventoryException {
+        coffeeMaker.addInventory("asdf", "5", "4", "3");
+    }
+
+    @Test(expected = InventoryException.class)
+    public void testAddInventoryException13() throws InventoryException {
+        coffeeMaker.addInventory("4", "asdf", "4", "3");
+    }
+
+    @Test(expected = InventoryException.class)
+    public void testAddInventoryException14() throws InventoryException {
+        coffeeMaker.addInventory("4", "5", "4", "asdf");
+    }
+
     //Если пользователь выбирает отрицательное или не целое число, пользователю будет предложено ввести сумму повторно.
     @Test(expected = InventoryException.class)
-    public void testAddInventoryException2() throws InventoryException {
+    public void testAddInventoryException21() throws InventoryException {
         coffeeMaker.addInventory("4", "-5", "3", "3");
     }
 
+    @Test(expected = InventoryException.class)
+    public void testAddInventoryException22() throws InventoryException {
+        coffeeMaker.addInventory("-4", "5", "3", "3");
+    }
+
+    @Test(expected = InventoryException.class)
+    public void testAddInventoryException23() throws InventoryException {
+        coffeeMaker.addInventory("4", "5", "-3", "3");
+    }
+
+    @Test(expected = InventoryException.class)
+    public void testAddInventoryException24() throws InventoryException {
+        coffeeMaker.addInventory("4", "5", "3", "-3");
+    }
+
     //Если пользователь выбирает отрицательное или не целое число, пользователю будет предложено ввести сумму повторно.
     @Test(expected = InventoryException.class)
-    public void testAddInventoryException3() throws InventoryException {
-        coffeeMaker.addInventory("4", "5.0", "3", "3");
+    public void testAddInventoryException31() throws InventoryException {
+        coffeeMaker.addInventory("4", "5.4", "3", "3");
+    }
+
+    @Test(expected = InventoryException.class)
+    public void testAddInventoryException32() throws InventoryException {
+        coffeeMaker.addInventory("4.0", "5.4", "3", "3");
+    }
+
+    @Test(expected = InventoryException.class)
+    public void testAddInventoryException33() throws InventoryException {
+        coffeeMaker.addInventory("4", "5", "3.6", "3");
+    }
+
+    @Test(expected = InventoryException.class)
+    public void testAddInventoryException34() throws InventoryException {
+        coffeeMaker.addInventory("4", "5", "3", "3.7");
     }
     //--------------------------------------------------
-    //testInventory
+    //testInventoryEnd
     //--------------------------------------------------
 
+    // пользователю будет показан список ингредиентов в кофеварке.
     @Test
     public void checkInventory() {
+        inventory.setMilk(10);
+        inventory.setChocolate(10);
+        inventory.setCoffee(10);
+        inventory.setSugar(10);
+        Assert.assertEquals("Coffee: 10\n" +
+                "Milk: 10\n" +
+                "Sugar: 10\n" +
+                "Chocolate: 10\n" , coffeeMaker.checkInventory());
     }
 
-
-
+    //Когда мы делаем кофе, выбираем действующий рецепт и платим больше, чем стоимость кофе. Сдача 25.
     @Test
     public void makeCoffee() {
+        coffeeMaker.addRecipe(recipe0);
+        assertEquals(25, coffeeMaker.makeCoffee(0, 75));
+
+    }
+
+    //Кофеварка проверит, достаточно ли ингредиентов в инвентаре для приготовления выбранного напитка.
+    //Если запасов недостаточно для приготовления напитка, отобразится сообщение, деньги пользователя будут возвращены
+    @Test
+    public void makeCoffee1() {
+        inventory.setMilk(1);
+        inventory.setChocolate(1);
+        inventory.setCoffee(1);
+        inventory.setSugar(1);
+
+        coffeeMaker.addRecipe(recipe0);
+        assertEquals(50, coffeeMaker.makeCoffee(0, 50));
+
     }
 
     @Test
