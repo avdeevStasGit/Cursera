@@ -162,9 +162,9 @@ public class CoffeeMakerTest {
         inventory.setCoffee(10);
         inventory.setSugar(10);
         Assert.assertEquals("Coffee: 10\n" +
-                "Milk: 10\n" +
-                "Sugar: 10\n" +
-                "Chocolate: 10\n" , coffeeMaker.checkInventory());
+                                    "Milk: 10\n" +
+                                    "Sugar: 10\n" +
+                                    "Chocolate: 10\n" , coffeeMaker.checkInventory());
     }
 
     //Когда мы делаем кофе, выбираем действующий рецепт и платим больше, чем стоимость кофе. Сдача 25.
