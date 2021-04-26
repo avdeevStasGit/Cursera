@@ -4,6 +4,7 @@ import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
 import edu.ncsu.csc326.coffeemaker.exceptions.RecipeException;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -65,8 +66,7 @@ public class CoffeeMakerTest {
         recipe4.setAmtSugar("1");
         recipe4.setPrice("100");
 
-        coffeeMaker.addRecipe(recipe0);
-        coffeeMaker.addRecipe(recipe1);
+
 
 
     }
@@ -99,15 +99,9 @@ public class CoffeeMakerTest {
 
     @Test
     public void testEditRecipe() throws RecipeException {
-        Recipe testRecipe = new Recipe();
-        testRecipe.setName("Tea");
-        testRecipe.setAmtChocolate("0");
-        testRecipe.setAmtCoffee("3");
-        testRecipe.setAmtMilk("1");
-        testRecipe.setAmtSugar("1");
-        testRecipe.setPrice("50");
-
-        coffeeMaker.editRecipe(0, testRecipe);
+        coffeeMaker.addRecipe((recipe0));
+        coffeeMaker.editRecipe(0, recipe1);
+        Assert.assertSame(recipe1, coffeeMaker.getRecipes()[0]);
 
 
     }
