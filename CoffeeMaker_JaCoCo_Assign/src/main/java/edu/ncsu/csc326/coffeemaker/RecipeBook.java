@@ -1,3 +1,16 @@
+/*
+ * Copyright (c) 2009,  Sarah Heckman, Laurie Williams, Dright Ho
+ * All Rights Reserved.
+ * 
+ * Permission has been explicitly granted to the University of Minnesota 
+ * Software Engineering Center to use and distribute this source for 
+ * educational purposes, including delivering online education through
+ * Coursera or other entities.  
+ * 
+ * No warranty is given regarding this software, including warranties as
+ * to the correctness or completeness of this software, including 
+ * fitness for purpose.
+ */
 package edu.ncsu.csc326.coffeemaker;
 
 public class RecipeBook {
@@ -5,7 +18,7 @@ public class RecipeBook {
 	/** Array of recipes in coffee maker*/
 	private Recipe [] recipeArray;
 	/** Number of recipes in coffee maker */
-	private final int NUM_RECIPES = 4; 
+	private final int NUM_RECIPES = 3; 
 	
 	/**
 	 * Default constructor for a RecipeBook.
@@ -55,9 +68,12 @@ public class RecipeBook {
 	 * @return String
 	 */
 	public synchronized String deleteRecipe(int recipeToDelete) {
+		if (recipeToDelete < 0 || recipeToDelete >= recipeArray.length) {
+			return null;
+		}
 		if (recipeArray[recipeToDelete] != null) {
 			String recipeName = recipeArray[recipeToDelete].getName();
-			recipeArray[recipeToDelete] = new Recipe();
+			recipeArray[recipeToDelete] = null;
 			return recipeName;
 		} else {
 			return null;
@@ -72,10 +88,13 @@ public class RecipeBook {
 	 * @return String
 	 */
 	public synchronized String editRecipe(int recipeToEdit, Recipe newRecipe) {
+		if (recipeToEdit < 0 || recipeToEdit >= recipeArray.length) {
+			return null;
+		}
 		if (recipeArray[recipeToEdit] != null) {
 			String recipeName = recipeArray[recipeToEdit].getName();
-			newRecipe.setName("");
 			recipeArray[recipeToEdit] = newRecipe;
+			newRecipe.setName(recipeName);
 			return recipeName;
 		} else {
 			return null;

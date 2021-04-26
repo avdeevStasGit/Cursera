@@ -23,6 +23,7 @@ repositories {
 
 project.ext {
     junitVersion = '4.12'
+    jacocoVersion = "0.8.6"
 }
 
 
@@ -38,7 +39,7 @@ dependencies {
 }
 
 jacoco {
-    toolVersion = "0.7.6.201602180812"
+    toolVersion = jacocoVersion
 }
 
 check.dependsOn jacocoTestReport

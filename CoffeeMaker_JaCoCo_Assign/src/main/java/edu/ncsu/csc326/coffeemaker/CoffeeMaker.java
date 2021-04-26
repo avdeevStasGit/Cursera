@@ -1,3 +1,16 @@
+/*
+ * Copyright (c) 2009,  Sarah Heckman, Laurie Williams, Dright Ho
+ * All Rights Reserved.
+ * 
+ * Permission has been explicitly granted to the University of Minnesota 
+ * Software Engineering Center to use and distribute this source for 
+ * educational purposes, including delivering online education through
+ * Coursera or other entities.  
+ * 
+ * No warranty is given regarding this software, including warranties as
+ * to the correctness or completeness of this software, including 
+ * fitness for purpose.
+ */
 package edu.ncsu.csc326.coffeemaker;
 
 import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
@@ -7,9 +20,9 @@ import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
  */
 public class CoffeeMaker {
 	/** Array of recipes in coffee maker */
-	private static RecipeBook recipeBook;
+	private RecipeBook recipeBook;
 	/** Inventory of the coffee maker */
-    private static Inventory inventory;
+    private Inventory inventory;
 	
     /**
      * Constructor for the coffee maker
@@ -79,16 +92,19 @@ public class CoffeeMaker {
     /**
      * Returns the change of a user's beverage purchase, or
      * the user's money if the beverage cannot be made
-     * @param r
+     * @param
      * @param amtPaid
      * @return int
      */
     public synchronized int makeCoffee(int recipeToPurchase, int amtPaid) {
         int change = 0;
         
-        if (getRecipes()[recipeToPurchase] == null) {
-        	change = amtPaid;
-        } else if (getRecipes()[recipeToPurchase].getPrice() <= amtPaid) {
+        if (recipeToPurchase < 0 || 
+            recipeToPurchase >= getRecipes().length || 
+            getRecipes()[recipeToPurchase] == null) {
+            	change = amtPaid;
+        } 
+        else if (getRecipes()[recipeToPurchase].getPrice() <= amtPaid) {
         	if (inventory.useIngredients(getRecipes()[recipeToPurchase])) {
         		change = amtPaid - getRecipes()[recipeToPurchase].getPrice();
         	} else {
