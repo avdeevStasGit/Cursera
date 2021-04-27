@@ -1,6 +1,6 @@
 # Cursera. University Minnesota
 
-Курсы по специализация Software Testing and Automation specialization.
+Курсы по специализации Software Testing and Automation.
 Projects
 
 Idea, Gradle, Java, Junit, Jacoco, Mockito, Selenium
