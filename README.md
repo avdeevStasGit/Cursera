@@ -3,9 +3,11 @@
 Курсы по специализация Software Testing and Automation specialization.
 Projects
 
-Idea, Java, Junit, Jacoco, Mockito, Selenium
+Idea, Gradle, Java, Junit, Jacoco, Mockito, Selenium
 
 ![hqdefault](https://user-images.githubusercontent.com/66553252/116185561-86628280-a72a-11eb-8805-73801fdf25c4.jpg)
+
+![https-2F2Fcdn evbuc_ com2Fimages2F284330502F1803360281572F12Foriginal-1-383x231](https://user-images.githubusercontent.com/66553252/116209258-65118e80-a74a-11eb-901a-2c7de26578f1.png)
 
 ![JunitLogo](https://user-images.githubusercontent.com/66553252/116185034-7e561300-a729-11eb-90b1-57466fe1eef6.png)
 
