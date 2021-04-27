@@ -60,7 +60,7 @@ public class CoffeeMakerTest {
 	
 	
 	//-----------------------------------------------------------------------
-	//	Set-up / Tear-down
+	//	Set-up // Tear-down
 	//-----------------------------------------------------------------------
 	/**
 	 * Initializes some recipes to test with, creates the {@link CoffeeMaker} 
