@@ -1,0 +1,2659 @@
+Index: src/main/java/edu/ncsu/csc326/coffeemaker/CoffeeMaker.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*\r\n * Copyright (c) 2009,  Sarah Heckman, Laurie Williams, Dright Ho\r\n * All Rights Reserved.\r\n * \r\n * Permission has been explicitly granted to the University of Minnesota \r\n * Software Engineering Center to use and distribute this source for \r\n * educational purposes, including delivering online education through\r\n * Coursera or other entities.  \r\n * \r\n * No warranty is given regarding this software, including warranties as\r\n * to the correctness or completeness of this software, including \r\n * fitness for purpose.\r\n */\r\npackage edu.ncsu.csc326.coffeemaker;\r\n\r\nimport edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;\r\n\r\n/**\r\n * @author Sarah Heckman\r\n */\r\npublic class CoffeeMaker {\r\n\t/** Array of recipes in coffee maker */\r\n\tprivate RecipeBook recipeBook;\r\n\t/** Inventory of the coffee maker */\r\n    private Inventory inventory;\r\n\t\r\n    /**\r\n     * Constructor for the coffee maker\r\n     *\r\n     */\r\n\tpublic CoffeeMaker() {\r\n\t    recipeBook = new RecipeBook();\r\n\t\tinventory = new Inventory();\r\n\t}\r\n\t\r\n\t/**\r\n\t * Returns true if the recipe is added to the\r\n\t * list of recipes in the CoffeeMaker and false\r\n\t * otherwise.\r\n\t * @param r\r\n\t * @return boolean\r\n\t */\r\n\tpublic boolean addRecipe(Recipe r) {\r\n\t\treturn recipeBook.addRecipe(r);\r\n\t}\r\n\t\r\n\t/**\r\n\t * Returns the name of the successfully deleted recipe\r\n\t * or null if the recipe cannot be deleted.\r\n\t * \r\n\t * @param recipeToDelete\r\n\t * @return String\r\n\t */\r\n\tpublic String deleteRecipe(int recipeToDelete) {\r\n\t\treturn recipeBook.deleteRecipe(recipeToDelete);\r\n\t}\r\n\t\r\n\t/**\r\n\t * Returns the name of the successfully edited recipe\r\n\t * or null if the recipe cannot be edited.\r\n\t * @param recipeToEdit\r\n\t * @param r\r\n\t * @return String\r\n\t */\r\n\tpublic String editRecipe(int recipeToEdit, Recipe r) {\r\n\t\treturn recipeBook.editRecipe(recipeToEdit, r);\r\n\t}\r\n    \r\n    /**\r\n     * Returns true if inventory was successfully added\r\n     * @param amtCoffee\r\n     * @param amtMilk\r\n     * @param amtSugar\r\n     * @param amtChocolate\r\n     * @return boolean\r\n     */\r\n    public synchronized void addInventory(String amtCoffee, String amtMilk, String amtSugar, String amtChocolate) throws InventoryException {\r\n\t    inventory.addCoffee(amtCoffee);\r\n\t    inventory.addMilk(amtMilk);\r\n\t    inventory.addSugar(amtSugar);\r\n\t    inventory.addChocolate(amtChocolate);\r\n    }\r\n    \r\n    /**\r\n     * Returns the inventory of the coffee maker\r\n     * @return Inventory\r\n     */\r\n    public synchronized String checkInventory() {\r\n        return inventory.toString();\r\n    }\r\n    \r\n    /**\r\n     * Returns the change of a user's beverage purchase, or\r\n     * the user's money if the beverage cannot be made\r\n     * @param r\r\n     * @param amtPaid\r\n     * @return int\r\n     */\r\n    public synchronized int makeCoffee(int recipeToPurchase, int amtPaid) {\r\n        int change = 0;\r\n        \r\n        if (recipeToPurchase < 0 || \r\n            recipeToPurchase >= getRecipes().length || \r\n            getRecipes()[recipeToPurchase] == null) {\r\n            \tchange = amtPaid;\r\n        } \r\n        else if (getRecipes()[recipeToPurchase].getPrice() <= amtPaid) {\r\n        \tif (inventory.useIngredients(getRecipes()[recipeToPurchase])) {\r\n        \t\tchange = amtPaid - getRecipes()[recipeToPurchase].getPrice();\r\n        \t} else {\r\n        \t\tchange = amtPaid;\r\n        \t}\r\n        } else {\r\n        \tchange = amtPaid;\r\n        }\r\n        \r\n        return change;\r\n    }\r\n\r\n\t/**\r\n\t * Returns the list of Recipes in the RecipeBook.\r\n\t * @return Recipe []\r\n\t */\r\n\tpublic synchronized Recipe[] getRecipes() {\r\n\t\treturn recipeBook.getRecipes();\r\n\t}\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/edu/ncsu/csc326/coffeemaker/CoffeeMaker.java b/src/main/java/edu/ncsu/csc326/coffeemaker/CoffeeMaker.java
+--- a/src/main/java/edu/ncsu/csc326/coffeemaker/CoffeeMaker.java	
++++ b/src/main/java/edu/ncsu/csc326/coffeemaker/CoffeeMaker.java	
+@@ -92,7 +92,7 @@
+     /**
+      * Returns the change of a user's beverage purchase, or
+      * the user's money if the beverage cannot be made
+-     * @param r
++     * @param
+      * @param amtPaid
+      * @return int
+      */
+Index: ../CoffeeMaker_JUnit_Assign/.idea/gradle.xml
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/.idea/gradle.xml b/../CoffeeMaker_JUnit_Assign/.idea/gradle.xml
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/.idea/gradle.xml	
++++ /dev/null	
+@@ -1,21 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="GradleMigrationSettings" migrationVersion="1" />
+-  <component name="GradleSettings">
+-    <option name="linkedExternalProjectsSettings">
+-      <GradleProjectSettings>
+-        <option name="distributionType" value="DEFAULT_WRAPPED" />
+-        <option name="externalProjectPath" value="$PROJECT_DIR$/../CoffeeMaker" />
+-      </GradleProjectSettings>
+-      <GradleProjectSettings>
+-        <option name="distributionType" value="DEFAULT_WRAPPED" />
+-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+-        <option name="modules">
+-          <set>
+-            <option value="$PROJECT_DIR$" />
+-          </set>
+-        </option>
+-      </GradleProjectSettings>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: ../CoffeeMaker_JUnit_Assign/.idea/vcs.xml
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/.idea/vcs.xml b/../CoffeeMaker_JUnit_Assign/.idea/vcs.xml
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/.idea/vcs.xml	
++++ /dev/null	
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="VcsDirectoryMappings">
+-    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: ../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/Recipe.java
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/Recipe.java b/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/Recipe.java
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/Recipe.java	
++++ /dev/null	
+@@ -1,199 +0,0 @@
+-/*
+- * Copyright (c) 2009,  Sarah Heckman, Laurie Williams, Dright Ho
+- * All Rights Reserved.
+- * 
+- * Permission has been explicitly granted to the University of Minnesota 
+- * Software Engineering Center to use and distribute this source for 
+- * educational purposes, including delivering online education through
+- * Coursera or other entities.  
+- * 
+- * No warranty is given regarding this software, including warranties as
+- * to the correctness or completeness of this software, including 
+- * fitness for purpose.
+- */
+-package edu.ncsu.csc326.coffeemaker;
+-
+-import edu.ncsu.csc326.coffeemaker.exceptions.RecipeException;
+-
+-/**
+- * @author   Sarah Heckman
+- */
+-public class Recipe {
+-    private String name;
+-    private int price;
+-    private int amtCoffee;
+-    private int amtMilk;
+-    private int amtSugar;
+-    private int amtChocolate;
+-    
+-    /**
+-     * Creates a default recipe for the coffee maker.
+-     */
+-    public Recipe() {
+-    	this.name = "";
+-    	this.price = 0;
+-    	this.amtCoffee = 0;
+-    	this.amtMilk = 0;
+-    	this.amtSugar = 0;
+-    	this.amtChocolate = 0;
+-    }
+-    
+-    /**
+-	 * @return   Returns the amtChocolate.
+-	 */
+-    public int getAmtChocolate() {
+-		return amtChocolate;
+-	}
+-    /**
+-	 * @param amtChocolate   The amtChocolate to set.
+-	 */
+-    public void setAmtChocolate(String chocolate) throws RecipeException {
+-    	int amtChocolate = 0;
+-    	try {
+-    		amtChocolate = Integer.parseInt(chocolate);
+-    	} catch (NumberFormatException e) {
+-    		throw new RecipeException("Units of chocolate must be a positive integer");
+-    	}
+-		if (amtChocolate >= 0) {
+-			this.amtChocolate = amtChocolate;
+-		} else {
+-			throw new RecipeException("Units of chocolate must be a positive integer");
+-		}
+-	}
+-    /**
+-	 * @return   Returns the amtCoffee.
+-	 */
+-    public int getAmtCoffee() {
+-		return amtCoffee;
+-	}
+-    /**
+-	 * @param amtCoffee   The amtCoffee to set.
+-	 */
+-    public void setAmtCoffee(String coffee) throws RecipeException {
+-    	int amtCoffee = 0;
+-    	try {
+-    		amtCoffee = Integer.parseInt(coffee);
+-    	} catch (NumberFormatException e) {
+-    		throw new RecipeException("Units of coffee must be a positive integer");
+-    	}
+-		if (amtCoffee >= 0) {
+-			this.amtCoffee = amtCoffee;
+-		} else {
+-			throw new RecipeException("Units of coffee must be a positive integer");
+-		}
+-	}
+-    /**
+-	 * @return   Returns the amtMilk.
+-	 */
+-    public int getAmtMilk() {
+-		return amtMilk;
+-	}
+-    /**
+-	 * @param amtMilk   The amtMilk to set.
+-	 */
+-    public void setAmtMilk(String milk) throws RecipeException{
+-    	int amtMilk = 0;
+-    	try {
+-    		amtMilk = Integer.parseInt(milk);
+-    	} catch (NumberFormatException e) {
+-    		throw new RecipeException("Units of milk must be a positive integer");
+-    	}
+-		if (amtMilk >= 0) {
+-			this.amtMilk = amtMilk;
+-		} else {
+-			throw new RecipeException("Units of milk must be a positive integer");
+-		}
+-	}
+-    /**
+-	 * @return   Returns the amtSugar.
+-	 */
+-    public int getAmtSugar() {
+-		return amtSugar;
+-	}
+-    /**
+-	 * @param amtSugar   The amtSugar to set.
+-	 */
+-    public void setAmtSugar(String sugar) throws RecipeException {
+-    	int amtSugar = 0;
+-    	try {
+-    		amtSugar = Integer.parseInt(sugar);
+-    	} catch (NumberFormatException e) {
+-    		throw new RecipeException("Units of sugar must be a positive integer");
+-    	}
+-		if (amtSugar >= 0) {
+-			this.amtSugar = amtSugar;
+-		} else {
+-			throw new RecipeException("Units of sugar must be a positive integer");
+-		}
+-	}
+-    /**
+-	 * @return   Returns the name.
+-	 */
+-    public String getName() {
+-		return name;
+-	}
+-    /**
+-	 * @param name   The name to set.
+-	 */
+-    public void setName(String name) {
+-    	if(name != null) {
+-    		this.name = name;
+-    	}
+-	}
+-    /**
+-	 * @return   Returns the price.
+-	 */
+-    public int getPrice() {
+-		return price;
+-	}
+-    /**
+-	 * @param price   The price to set.
+-	 */
+-    public void setPrice(String price) throws RecipeException{
+-    	int amtPrice = 0;
+-    	try {
+-    		amtPrice = Integer.parseInt(price);
+-    	} catch (NumberFormatException e) {
+-    		throw new RecipeException("Price must be a positive integer");
+-    	}
+-		if (amtPrice >= 0) {
+-			this.price = amtPrice;
+-		} else {
+-			throw new RecipeException("Price must be a positive integer");
+-		}
+-	} 
+-    
+-    /**
+-     * Returns the name of the recipe.
+-     * @return String
+-     */
+-    public String toString() {
+-    	return name;
+-    }
+-
+-	@Override
+-	public int hashCode() {
+-		final int prime = 31;
+-		int result = 1;
+-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+-		return result;
+-	}
+-
+-	@Override
+-	public boolean equals(Object obj) {
+-		if (this == obj)
+-			return true;
+-		if (obj == null)
+-			return false;
+-		if (getClass() != obj.getClass())
+-			return false;
+-		final Recipe other = (Recipe) obj;
+-		if (name == null) {
+-			if (other.name != null)
+-				return false;
+-		} else if (!name.equals(other.name))
+-			return false;
+-		return true;
+-	}
+-
+-}
+Index: ../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/RecipeBook.java
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/RecipeBook.java b/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/RecipeBook.java
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/RecipeBook.java	
++++ /dev/null	
+@@ -1,98 +0,0 @@
+-/*
+- * Copyright (c) 2009,  Sarah Heckman, Laurie Williams, Dright Ho
+- * All Rights Reserved.
+- * 
+- * Permission has been explicitly granted to the University of Minnesota 
+- * Software Engineering Center to use and distribute this source for 
+- * educational purposes, including delivering online education through
+- * Coursera or other entities.  
+- * 
+- * No warranty is given regarding this software, including warranties as
+- * to the correctness or completeness of this software, including 
+- * fitness for purpose.
+- */
+-package edu.ncsu.csc326.coffeemaker;
+-
+-public class RecipeBook {
+-	
+-	/** Array of recipes in coffee maker*/
+-	private Recipe [] recipeArray;
+-	/** Number of recipes in coffee maker */
+-	private final int NUM_RECIPES = 4; 
+-	
+-	/**
+-	 * Default constructor for a RecipeBook.
+-	 */
+-	public RecipeBook() {
+-		recipeArray = new Recipe[NUM_RECIPES];
+-	}
+-	
+-	/**
+-	 * Returns the recipe array.
+-	 * @param r
+-	 * @return Recipe[]
+-	 */
+-	public synchronized Recipe[] getRecipes() {
+-		return recipeArray;
+-	}
+-	
+-	public synchronized boolean addRecipe(Recipe r) {
+-		//Assume recipe doesn't exist in the array until 
+-		//find out otherwise
+-		boolean exists = false;
+-		//Check that recipe doesn't already exist in array
+-		for (int i = 0; i < recipeArray.length; i++ ) {
+-			if (r.equals(recipeArray[i])) {
+-				exists = true;
+-			}
+-		}
+-		//Assume recipe cannot be added until find an empty
+-		//spot
+-		boolean added = false;
+-		//Check for first empty spot in array
+-		if (!exists) {
+-			for (int i = 0; i < recipeArray.length && !added; i++) {
+-				if (recipeArray[i] == null) {
+-					recipeArray[i] = r;
+-					added = true;
+-				}
+-			}
+-		}
+-		return added;
+-	}
+-
+-	/**
+-	 * Returns the name of the recipe deleted at the position specified
+-	 * and null if the recipe does not exist.
+-	 * @param recipeToDelete
+-	 * @return String
+-	 */
+-	public synchronized String deleteRecipe(int recipeToDelete) {
+-		if (recipeArray[recipeToDelete] != null) {
+-			String recipeName = recipeArray[recipeToDelete].getName();
+-			recipeArray[recipeToDelete] = new Recipe();
+-			return recipeName;
+-		} else {
+-			return null;
+-		}
+-	}
+-	
+-	/**
+-	 * Returns the name of the recipe edited at the position specified
+-	 * and null if the recipe does not exist.
+-	 * @param recipeToEdit
+-	 * @param newRecipe
+-	 * @return String
+-	 */
+-	public synchronized String editRecipe(int recipeToEdit, Recipe newRecipe) {
+-		if (recipeArray[recipeToEdit] != null) {
+-			String recipeName = recipeArray[recipeToEdit].getName();
+-			newRecipe.setName("");
+-			recipeArray[recipeToEdit] = newRecipe;
+-			return recipeName;
+-		} else {
+-			return null;
+-		}
+-	}
+-
+-}
+Index: ../CoffeeMaker_JUnit_Assign/.idea/misc.xml
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/.idea/misc.xml b/../CoffeeMaker_JUnit_Assign/.idea/misc.xml
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/.idea/misc.xml	
++++ /dev/null	
+@@ -1,7 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ExternalStorageConfigurationManager" enabled="true" />
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+-    <output url="file://$PROJECT_DIR$/out" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: ../CoffeeMaker_JUnit_Assign/build/reports/tests/test/classes/edu.ncsu.csc326.coffeemaker.CoffeeMakerTest.html
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/build/reports/tests/test/classes/edu.ncsu.csc326.coffeemaker.CoffeeMakerTest.html b/../CoffeeMaker_JUnit_Assign/build/reports/tests/test/classes/edu.ncsu.csc326.coffeemaker.CoffeeMakerTest.html
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/build/reports/tests/test/classes/edu.ncsu.csc326.coffeemaker.CoffeeMakerTest.html	
++++ /dev/null	
+@@ -1,106 +0,0 @@
+-<!DOCTYPE html>
+-<html>
+-<head>
+-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+-<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+-<title>Test results - Class edu.ncsu.csc326.coffeemaker.CoffeeMakerTest</title>
+-<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+-<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+-<script src="../js/report.js" type="text/javascript"></script>
+-</head>
+-<body>
+-<div id="content">
+-<h1>Class edu.ncsu.csc326.coffeemaker.CoffeeMakerTest</h1>
+-<div class="breadcrumbs">
+-<a href="../index.html">all</a> &gt; 
+-<a href="../packages/edu.ncsu.csc326.coffeemaker.html">edu.ncsu.csc326.coffeemaker</a> &gt; CoffeeMakerTest</div>
+-<div id="summary">
+-<table>
+-<tr>
+-<td>
+-<div class="summaryGroup">
+-<table>
+-<tr>
+-<td>
+-<div class="infoBox" id="tests">
+-<div class="counter">3</div>
+-<p>tests</p>
+-</div>
+-</td>
+-<td>
+-<div class="infoBox" id="failures">
+-<div class="counter">0</div>
+-<p>failures</p>
+-</div>
+-</td>
+-<td>
+-<div class="infoBox" id="ignored">
+-<div class="counter">0</div>
+-<p>ignored</p>
+-</div>
+-</td>
+-<td>
+-<div class="infoBox" id="duration">
+-<div class="counter">0.073s</div>
+-<p>duration</p>
+-</div>
+-</td>
+-</tr>
+-</table>
+-</div>
+-</td>
+-<td>
+-<div class="infoBox success" id="successRate">
+-<div class="percent">100%</div>
+-<p>successful</p>
+-</div>
+-</td>
+-</tr>
+-</table>
+-</div>
+-<div id="tabs">
+-<ul class="tabLinks">
+-<li>
+-<a href="#tab0">Tests</a>
+-</li>
+-</ul>
+-<div id="tab0" class="tab">
+-<h2>Tests</h2>
+-<table>
+-<thead>
+-<tr>
+-<th>Test</th>
+-<th>Duration</th>
+-<th>Result</th>
+-</tr>
+-</thead>
+-<tr>
+-<td class="success">testAddInventory</td>
+-<td>0.056s</td>
+-<td class="success">passed</td>
+-</tr>
+-<tr>
+-<td class="success">testAddInventoryException</td>
+-<td>0.012s</td>
+-<td class="success">passed</td>
+-</tr>
+-<tr>
+-<td class="success">testMakeCoffee</td>
+-<td>0.005s</td>
+-<td class="success">passed</td>
+-</tr>
+-</table>
+-</div>
+-</div>
+-<div id="footer">
+-<p>
+-<div>
+-<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+-<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+-</label>
+-</div>Generated by 
+-<a href="http://www.gradle.org">Gradle 4.3.1</a> at 02.04.2021 16:59:58</p>
+-</div>
+-</div>
+-</body>
+-</html>
+Index: ../CoffeeMaker_JUnit_Assign/.gradle/buildOutputCleanup/cache.properties
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/.gradle/buildOutputCleanup/cache.properties b/../CoffeeMaker_JUnit_Assign/.gradle/buildOutputCleanup/cache.properties
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/.gradle/buildOutputCleanup/cache.properties	
++++ /dev/null	
+@@ -1,2 +0,0 @@
+-#Fri Apr 02 16:58:52 MSK 2021
+-gradle.version=4.3.1
+Index: ../CoffeeMaker_JUnit_Assign/gradlew.bat
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/gradlew.bat b/../CoffeeMaker_JUnit_Assign/gradlew.bat
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/gradlew.bat	
++++ /dev/null	
+@@ -1,84 +0,0 @@
+-@if "%DEBUG%" == "" @echo off
+-@rem ##########################################################################
+-@rem
+-@rem  Gradle startup script for Windows
+-@rem
+-@rem ##########################################################################
+-
+-@rem Set local scope for the variables with windows NT shell
+-if "%OS%"=="Windows_NT" setlocal
+-
+-set DIRNAME=%~dp0
+-if "%DIRNAME%" == "" set DIRNAME=.
+-set APP_BASE_NAME=%~n0
+-set APP_HOME=%DIRNAME%
+-
+-@rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+-set DEFAULT_JVM_OPTS=
+-
+-@rem Find java.exe
+-if defined JAVA_HOME goto findJavaFromJavaHome
+-
+-set JAVA_EXE=java.exe
+-%JAVA_EXE% -version >NUL 2>&1
+-if "%ERRORLEVEL%" == "0" goto init
+-
+-echo.
+-echo ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+-echo.
+-echo Please set the JAVA_HOME variable in your environment to match the
+-echo location of your Java installation.
+-
+-goto fail
+-
+-:findJavaFromJavaHome
+-set JAVA_HOME=%JAVA_HOME:"=%
+-set JAVA_EXE=%JAVA_HOME%/bin/java.exe
+-
+-if exist "%JAVA_EXE%" goto init
+-
+-echo.
+-echo ERROR: JAVA_HOME is set to an invalid directory: %JAVA_HOME%
+-echo.
+-echo Please set the JAVA_HOME variable in your environment to match the
+-echo location of your Java installation.
+-
+-goto fail
+-
+-:init
+-@rem Get command-line arguments, handling Windows variants
+-
+-if not "%OS%" == "Windows_NT" goto win9xME_args
+-
+-:win9xME_args
+-@rem Slurp the command line arguments.
+-set CMD_LINE_ARGS=
+-set _SKIP=2
+-
+-:win9xME_args_slurp
+-if "x%~1" == "x" goto execute
+-
+-set CMD_LINE_ARGS=%*
+-
+-:execute
+-@rem Setup the command line
+-
+-set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
+-
+-@rem Execute Gradle
+-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %CMD_LINE_ARGS%
+-
+-:end
+-@rem End local scope for the variables with windows NT shell
+-if "%ERRORLEVEL%"=="0" goto mainEnd
+-
+-:fail
+-rem Set variable GRADLE_EXIT_CONSOLE if you need the _script_ return code instead of
+-rem the _cmd.exe /c_ return code!
+-if  not "" == "%GRADLE_EXIT_CONSOLE%" exit 1
+-exit /b 1
+-
+-:mainEnd
+-if "%OS%"=="Windows_NT" endlocal
+-
+-:omega
+Index: ../CoffeeMaker_JUnit_Assign/settings.gradle
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/settings.gradle b/../CoffeeMaker_JUnit_Assign/settings.gradle
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/settings.gradle	
++++ /dev/null	
+@@ -1,2 +0,0 @@
+-rootProject.name = 'CoffeeMaker_JUnit_Assign'
+-
+Index: .idea/.gitignore
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+deleted file mode 100644
+--- a/.idea/.gitignore	
++++ /dev/null	
+@@ -1,3 +0,0 @@
+-# Default ignored files
+-/shelf/
+-/workspace.xml
+Index: ../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/Main.java
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/Main.java b/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/Main.java
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/Main.java	
++++ /dev/null	
+@@ -1,312 +0,0 @@
+-/*
+- * Copyright (c) 2009,  Sarah Heckman, Laurie Williams, Dright Ho
+- * All Rights Reserved.
+- * 
+- * Permission has been explicitly granted to the University of Minnesota 
+- * Software Engineering Center to use and distribute this source for 
+- * educational purposes, including delivering online education through
+- * Coursera or other entities.  
+- * 
+- * No warranty is given regarding this software, including warranties as
+- * to the correctness or completeness of this software, including 
+- * fitness for purpose.
+- */
+-package edu.ncsu.csc326.coffeemaker;
+-
+-import java.io.BufferedReader;
+-import java.io.IOException;
+-import java.io.InputStreamReader;
+-
+-import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
+-import edu.ncsu.csc326.coffeemaker.exceptions.RecipeException;
+-
+-/**
+- * 
+- * @author Sarah Heckman
+- *
+- * Starts the console UI for the CoffeeMaker
+- */
+-public class Main {
+-    private static CoffeeMaker coffeeMaker;
+-
+-    /**
+-     * Prints the main menu and handles user input for 
+-     * main menu commands.
+-     */
+-    public static void mainMenu() {
+-        System.out.println("1. Add a recipe");
+-        System.out.println("2. Delete a recipe");
+-        System.out.println("3. Edit a recipe");
+-        System.out.println("4. Add inventory");
+-        System.out.println("5. Check inventory");
+-        System.out.println("6. Make coffee");
+-        System.out.println("0. Exit\n");
+-        
+-        //Get user input
+-        try {
+-        	int userInput = Integer.parseInt(inputOutput("Please press the number that corresponds to what you would like the coffee maker to do."));
+-        	
+-        	if (userInput >= 0 && userInput <=6) {
+-		        if (userInput == 1) addRecipe();
+-		        if (userInput == 2) deleteRecipe();
+-		        if (userInput == 3) editRecipe();
+-		        if (userInput == 4) addInventory();
+-		        if (userInput == 5) checkInventory();
+-		        if (userInput == 6) makeCoffee();
+-		        if (userInput == 0) System.exit(0);
+-        	} else {
+-        		System.out.println("Please enter a number from 0 - 6");
+-            	mainMenu();
+-        	}
+-        } catch (NumberFormatException e) {
+-        	System.out.println("Please enter a number from 0 - 6");
+-        	mainMenu();
+-        }
+-    }
+-    
+-    /**
+-     * The add recipe user interface that process user input.
+-     */
+-	public static void addRecipe() {
+-		
+-	    //Read in recipe name
+-	    String name = inputOutput("\nPlease enter the recipe name: ");
+-	    
+-	    //Read in recipe price
+-	    String priceString = inputOutput("\nPlease enter the recipe price: $");
+-	    	    
+-	    //Read in amt coffee
+-	    String coffeeString = inputOutput("\nPlease enter the units of coffee in the recipe: ");
+-	    	    
+-	    //Read in amt milk
+-	    String milkString = inputOutput("\nPlease enter the units of milk in the recipe: ");
+-	    	    
+-	    //Read in amt sugar
+-	    String sugarString = inputOutput("\nPlease enter the units of sugar in the recipe: ");
+-	    	    
+-	    //Read in amt chocolate
+-	    String chocolateString = inputOutput("\nPlease enter the units of chocolate in the recipe: ");
+-	    	    
+-		Recipe r = new Recipe();
+-		try {
+-			r.setName(name);
+-			r.setPrice(priceString);
+-			r.setAmtCoffee(coffeeString);
+-			r.setAmtMilk(milkString);
+-			r.setAmtSugar(sugarString);
+-			r.setAmtChocolate(chocolateString);
+-			
+-			boolean recipeAdded = coffeeMaker.addRecipe(r);
+-		    
+-		    if(recipeAdded) {
+-		    	System.out.println(name + " successfully added.\n");
+-		    } else {
+-		    	System.out.println(name + " could not be added.\n");
+-		    }
+-		} catch (RecipeException e) {
+-			System.out.println(e.getMessage());
+-		} finally {
+-			mainMenu();
+-		}
+-    }
+-    
+-	/**
+-	 * Delete recipe user interface that processes input.
+-	 */
+-    public static void deleteRecipe() {
+-        Recipe [] recipes = coffeeMaker.getRecipes();
+-        for(int i = 0; i < recipes.length; i++) {
+-        	if (recipes[i] != null) {
+-        		System.out.println((i+1) + ". " + recipes[i].getName());
+-        	}
+-        }
+-        int recipeToDelete = recipeListSelection("Please select the number of the recipe to delete.");
+-        
+-	    if(recipeToDelete < 0) {
+-	    	mainMenu();
+-	    }
+-	    
+-        String recipeDeleted = coffeeMaker.deleteRecipe(recipeToDelete);
+-        
+-        if (recipeDeleted != null) {
+-        	System.out.println(recipeDeleted + " successfully deleted.\n");
+-        } else {
+-	        System.out.println("Selected recipe doesn't exist and could not be deleted.\n");
+-        }
+-        mainMenu();
+-    }
+-    
+-    /**
+-     * Edit recipe user interface the processes user input.
+-     */
+-    public static void editRecipe() {
+-        Recipe [] recipes = coffeeMaker.getRecipes();
+-        for(int i = 0; i < recipes.length; i++) {
+-        	if (recipes[i] != null) {
+-        		System.out.println((i+1) + ". " + recipes[i].getName());
+-        	}
+-        }
+-        int recipeToEdit = recipeListSelection("Please select the number of the recipe to edit.");
+-        
+-	    if(recipeToEdit < 0) {
+-	    	mainMenu();
+-	    }
+-	    
+-	    //Read in recipe price
+-	    String priceString = inputOutput("\nPlease enter the recipe price: $");
+-	    
+-	    //Read in amt coffee
+-	    String coffeeString = inputOutput("\nPlease enter the units of coffee in the recipe: ");
+-	    
+-	    //Read in amt milk
+-	    String milkString = inputOutput("\nPlease enter the units of milk in the recipe: ");
+-	    
+-	    //Read in amt sugar
+-	    String sugarString = inputOutput("\nPlease enter the units of sugar in the recipe: ");
+-	    
+-	    //Read in amt chocolate
+-	    String chocolateString = inputOutput("\nPlease enter the units of chocolate in the recipe: ");
+-	    
+-	    Recipe newRecipe = new Recipe();
+-	    try {
+-			newRecipe.setPrice(priceString);
+-			newRecipe.setAmtCoffee(coffeeString);
+-			newRecipe.setAmtMilk(milkString);
+-			newRecipe.setAmtSugar(sugarString);
+-			newRecipe.setAmtChocolate(chocolateString);
+-			
+-			String recipeEdited = coffeeMaker.editRecipe(recipeToEdit, newRecipe);
+-	        
+-	        if (recipeEdited != null) {
+-	        	System.out.println(recipeEdited + " successfully edited.\n");
+-	        }
+-		    else {
+-		    	System.out.println(recipeEdited + "could not be edited.\n");
+-		    }
+-		} catch (RecipeException e) {
+-			System.out.println(e.getMessage());
+-		} finally {
+-			mainMenu();
+-		}
+-    }
+-    
+-    /**
+-     * Add inventory user interface that processes input.
+-     */
+-    public static void addInventory() {
+-	    //Read in amt coffee
+-	    String coffeeString = inputOutput("\nPlease enter the units of coffee to add: ");
+-	    	    
+-	    //Read in amt milk
+-	    String milkString = inputOutput("\nPlease enter the units of milk to add: ");
+-	    	    
+-	    //Read in amt sugar
+-	    String sugarString = inputOutput("\nPlease enter the units of sugar to add: ");
+-	    	    
+-	    //Read in amt chocolate
+-	    String chocolateString = inputOutput("\nPlease enter the units of chocolate to add: ");
+-	    	    
+-        try {
+-        	coffeeMaker.addInventory(coffeeString, milkString, sugarString, chocolateString);
+-        	System.out.println("Inventory successfully added");
+-        } catch (InventoryException e) {
+-        	System.out.println("Inventory was not added");
+-        } finally {
+-        	mainMenu();
+-        }
+-    }
+-    
+-    /**
+-     * Check inventory user interface that processes input.
+-     */
+-    public static void checkInventory() {
+-    	System.out.println(coffeeMaker.checkInventory());
+-    	mainMenu();
+-    }
+-    
+-    /**
+-     * Make coffee user interface the processes input.
+-     */
+-    public static void makeCoffee() {
+-        Recipe [] recipes = coffeeMaker.getRecipes();
+-        for(int i = 0; i < recipes.length; i++) {
+-        	if (recipes[i] != null) {
+-        		System.out.println((i+1) + ". " + recipes[i].getName());
+-        	}
+-        }
+-        
+-        int recipeToPurchase = recipeListSelection("Please select the number of the recipe to purchase.");
+-        
+-        String amountPaid = inputOutput("Please enter the amount you wish to pay");
+-        int amtPaid = 0;
+-        try {
+-        	amtPaid = Integer.parseInt(amountPaid);
+-        } catch (NumberFormatException e) {
+-        	System.out.println("Please enter a positive integer");
+-        	mainMenu();
+-        }
+-        
+-        int change = coffeeMaker.makeCoffee(recipeToPurchase, amtPaid);
+-        
+-        if (change == amtPaid) {
+-        	System.out.println("Insufficient funds to purchase.");
+-        } else {
+-        	System.out.println("Thank you for purchasing " + coffeeMaker.getRecipes()[recipeToPurchase].getName());
+-        }
+-        System.out.println("Your change is: " + change + "\n");
+-        mainMenu();
+-    }
+-    
+-    /**
+-     * Passes a prompt to the user and returns the user specified 
+-     * string.
+-     * @param message
+-     * @return String
+-     */
+-    private static String inputOutput(String message) {
+-        System.out.println(message);
+-	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+-	    String returnString = "";
+-	    try {
+-	        returnString = br.readLine();
+-	    }
+-	    catch (IOException e){
+-	        System.out.println("Error reading in value");
+-	        mainMenu();
+-	    }
+-	    return returnString;
+-    }
+-    
+-    /**
+-     * Passes a prompt to the user that deals with the recipe list
+-     * and returns the user selected number.
+-     * @param message
+-     * @return int
+-     */
+-    private static int recipeListSelection(String message) {
+-    	String userSelection = inputOutput(message);
+-    	int recipe = 0;
+-        try {
+-        	recipe = Integer.parseInt(userSelection) - 1;
+-        	if (recipe >= 0 && recipe <=2) {
+-        		//do nothing here.
+-        	} else {
+-        		recipe = -1;
+-        	}
+-        } catch (NumberFormatException e) {
+-        	System.out.println("Please select a number from 1-3.");
+-        	recipe = -1;
+-        }
+-        return recipe;
+-    }
+-    
+-    /**
+-     * Starts the coffee maker program.
+-     * @param args
+-     */
+-    public static void main(String[] args) {
+-	    coffeeMaker = new CoffeeMaker();
+-	    System.out.println("Welcome to the CoffeeMaker!\n");
+-	    mainMenu();
+-	}
+-}
+Index: ../CoffeeMaker_JUnit_Assign/build/reports/tests/test/packages/edu.ncsu.csc326.coffeemaker.html
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/build/reports/tests/test/packages/edu.ncsu.csc326.coffeemaker.html b/../CoffeeMaker_JUnit_Assign/build/reports/tests/test/packages/edu.ncsu.csc326.coffeemaker.html
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/build/reports/tests/test/packages/edu.ncsu.csc326.coffeemaker.html	
++++ /dev/null	
+@@ -1,103 +0,0 @@
+-<!DOCTYPE html>
+-<html>
+-<head>
+-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+-<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+-<title>Test results - Package edu.ncsu.csc326.coffeemaker</title>
+-<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+-<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+-<script src="../js/report.js" type="text/javascript"></script>
+-</head>
+-<body>
+-<div id="content">
+-<h1>Package edu.ncsu.csc326.coffeemaker</h1>
+-<div class="breadcrumbs">
+-<a href="../index.html">all</a> &gt; edu.ncsu.csc326.coffeemaker</div>
+-<div id="summary">
+-<table>
+-<tr>
+-<td>
+-<div class="summaryGroup">
+-<table>
+-<tr>
+-<td>
+-<div class="infoBox" id="tests">
+-<div class="counter">3</div>
+-<p>tests</p>
+-</div>
+-</td>
+-<td>
+-<div class="infoBox" id="failures">
+-<div class="counter">0</div>
+-<p>failures</p>
+-</div>
+-</td>
+-<td>
+-<div class="infoBox" id="ignored">
+-<div class="counter">0</div>
+-<p>ignored</p>
+-</div>
+-</td>
+-<td>
+-<div class="infoBox" id="duration">
+-<div class="counter">0.073s</div>
+-<p>duration</p>
+-</div>
+-</td>
+-</tr>
+-</table>
+-</div>
+-</td>
+-<td>
+-<div class="infoBox success" id="successRate">
+-<div class="percent">100%</div>
+-<p>successful</p>
+-</div>
+-</td>
+-</tr>
+-</table>
+-</div>
+-<div id="tabs">
+-<ul class="tabLinks">
+-<li>
+-<a href="#tab0">Classes</a>
+-</li>
+-</ul>
+-<div id="tab0" class="tab">
+-<h2>Classes</h2>
+-<table>
+-<thread>
+-<tr>
+-<th>Class</th>
+-<th>Tests</th>
+-<th>Failures</th>
+-<th>Ignored</th>
+-<th>Duration</th>
+-<th>Success rate</th>
+-</tr>
+-</thread>
+-<tr>
+-<td class="success">
+-<a href="../classes/edu.ncsu.csc326.coffeemaker.CoffeeMakerTest.html">CoffeeMakerTest</a>
+-</td>
+-<td>3</td>
+-<td>0</td>
+-<td>0</td>
+-<td>0.073s</td>
+-<td class="success">100%</td>
+-</tr>
+-</table>
+-</div>
+-</div>
+-<div id="footer">
+-<p>
+-<div>
+-<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+-<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+-</label>
+-</div>Generated by 
+-<a href="http://www.gradle.org">Gradle 4.3.1</a> at 02.04.2021 16:59:58</p>
+-</div>
+-</div>
+-</body>
+-</html>
+Index: ../CoffeeMaker_JUnit_Assign/.idea/.gitignore
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/.idea/.gitignore b/../CoffeeMaker_JUnit_Assign/.idea/.gitignore
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/.idea/.gitignore	
++++ /dev/null	
+@@ -1,3 +0,0 @@
+-# Default ignored files
+-/shelf/
+-/workspace.xml
+Index: ../CoffeeMaker_JUnit_Assign/build/test-results/test/TEST-edu.ncsu.csc326.coffeemaker.CoffeeMakerTest.xml
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/build/test-results/test/TEST-edu.ncsu.csc326.coffeemaker.CoffeeMakerTest.xml b/../CoffeeMaker_JUnit_Assign/build/test-results/test/TEST-edu.ncsu.csc326.coffeemaker.CoffeeMakerTest.xml
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/build/test-results/test/TEST-edu.ncsu.csc326.coffeemaker.CoffeeMakerTest.xml	
++++ /dev/null	
+@@ -1,9 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<testsuite name="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-04-02T13:59:57" hostname="idea-PC" time="0.107">
+-  <properties/>
+-  <testcase name="testAddInventory" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.056"/>
+-  <testcase name="testMakeCoffee" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.005"/>
+-  <testcase name="testAddInventoryException" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.012"/>
+-  <system-out><![CDATA[]]></system-out>
+-  <system-err><![CDATA[]]></system-err>
+-</testsuite>
+Index: ../CoffeeMaker_JUnit_Assign/src/test/java/edu/ncsu/csc326/coffeemaker/CoffeeMakerTest.java
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/src/test/java/edu/ncsu/csc326/coffeemaker/CoffeeMakerTest.java b/../CoffeeMaker_JUnit_Assign/src/test/java/edu/ncsu/csc326/coffeemaker/CoffeeMakerTest.java
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/src/test/java/edu/ncsu/csc326/coffeemaker/CoffeeMakerTest.java	
++++ /dev/null	
+@@ -1,135 +0,0 @@
+-/*
+- * Copyright (c) 2009,  Sarah Heckman, Laurie Williams, Dright Ho
+- * All Rights Reserved.
+- * 
+- * Permission has been explicitly granted to the University of Minnesota 
+- * Software Engineering Center to use and distribute this source for 
+- * educational purposes, including delivering online education through
+- * Coursera or other entities.  
+- * 
+- * No warranty is given regarding this software, including warranties as
+- * to the correctness or completeness of this software, including 
+- * fitness for purpose.
+- * 
+- * 
+- * Modifications 
+- * 20171114 - Ian De Silva - Updated to comply with JUnit 4 and to adhere to 
+- * 							 coding standards.  Added test documentation.
+- */
+-package edu.ncsu.csc326.coffeemaker;
+-
+-import static org.junit.Assert.assertEquals;
+-
+-import org.junit.Before;
+-import org.junit.Test;
+-
+-import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
+-import edu.ncsu.csc326.coffeemaker.exceptions.RecipeException;
+-
+-/**
+- * Unit tests for CoffeeMaker class.
+- * 
+- * @author Sarah Heckman
+- */
+-public class CoffeeMakerTest {
+-	
+-	/**
+-	 * The object under test.
+-	 */
+-	private CoffeeMaker coffeeMaker;
+-	
+-	// Sample recipes to use in testing.
+-	private Recipe recipe1;
+-	private Recipe recipe2;
+-	private Recipe recipe3;
+-	private Recipe recipe4;
+-
+-	/**
+-	 * Initializes some recipes to test with and the {@link CoffeeMaker} 
+-	 * object we wish to test.
+-	 * 
+-	 * @throws RecipeException  if there was an error parsing the ingredient 
+-	 * 		amount when setting up the recipe.
+-	 */
+-	@Before
+-	public void setUp() throws RecipeException {
+-		coffeeMaker = new CoffeeMaker();
+-		
+-		//Set up for r1
+-		recipe1 = new Recipe();
+-		recipe1.setName("Coffee");
+-		recipe1.setAmtChocolate("0");
+-		recipe1.setAmtCoffee("3");
+-		recipe1.setAmtMilk("1");
+-		recipe1.setAmtSugar("1");
+-		recipe1.setPrice("50");
+-		
+-		//Set up for r2
+-		recipe2 = new Recipe();
+-		recipe2.setName("Mocha");
+-		recipe2.setAmtChocolate("20");
+-		recipe2.setAmtCoffee("3");
+-		recipe2.setAmtMilk("1");
+-		recipe2.setAmtSugar("1");
+-		recipe2.setPrice("75");
+-		
+-		//Set up for r3
+-		recipe3 = new Recipe();
+-		recipe3.setName("Latte");
+-		recipe3.setAmtChocolate("0");
+-		recipe3.setAmtCoffee("3");
+-		recipe3.setAmtMilk("3");
+-		recipe3.setAmtSugar("1");
+-		recipe3.setPrice("100");
+-		
+-		//Set up for r4
+-		recipe4 = new Recipe();
+-		recipe4.setName("Hot Chocolate");
+-		recipe4.setAmtChocolate("4");
+-		recipe4.setAmtCoffee("0");
+-		recipe4.setAmtMilk("1");
+-		recipe4.setAmtSugar("1");
+-		recipe4.setPrice("65");
+-	}
+-	
+-	
+-	/**
+-	 * Given a coffee maker with the default inventory
+-	 * When we add inventory with well-formed quantities
+-	 * Then we do not get an exception trying to read the inventory quantities.
+-	 * 
+-	 * @throws InventoryException  if there was an error parsing the quanity
+-	 * 		to a positive integer.
+-	 */
+-	@Test
+-	public void testAddInventory() throws InventoryException {
+-		coffeeMaker.addInventory("4","7","0","9");
+-	}
+-	
+-	/**
+-	 * Given a coffee maker with the default inventory
+-	 * When we add inventory with malformed quantities (i.e., a negative 
+-	 * quantity and a non-numeric string)
+-	 * Then we get an inventory exception
+-	 * 
+-	 * @throws InventoryException  if there was an error parsing the quanity
+-	 * 		to a positive integer.
+-	 */
+-	@Test(expected = InventoryException.class)
+-	public void testAddInventoryException() throws InventoryException {
+-		coffeeMaker.addInventory("4", "-1", "asdf", "3");
+-	}
+-	
+-	/**
+-	 * Given a coffee maker with one valid recipe
+-	 * When we make coffee, selecting the valid recipe and paying more than 
+-	 * 		the coffee costs
+-	 * Then we get the correct change back.
+-	 */
+-	@Test
+-	public void testMakeCoffee() {
+-		coffeeMaker.addRecipe(recipe1);
+-		assertEquals(25, coffeeMaker.makeCoffee(0, 75));
+-	}
+-
+-}
+Index: ../CoffeeMaker_JUnit_Assign/build/reports/tests/test/css/style.css
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/build/reports/tests/test/css/style.css b/../CoffeeMaker_JUnit_Assign/build/reports/tests/test/css/style.css
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/build/reports/tests/test/css/style.css	
++++ /dev/null	
+@@ -1,84 +0,0 @@
+-
+-#summary {
+-    margin-top: 30px;
+-    margin-bottom: 40px;
+-}
+-
+-#summary table {
+-    border-collapse: collapse;
+-}
+-
+-#summary td {
+-    vertical-align: top;
+-}
+-
+-.breadcrumbs, .breadcrumbs a {
+-    color: #606060;
+-}
+-
+-.infoBox {
+-    width: 110px;
+-    padding-top: 15px;
+-    padding-bottom: 15px;
+-    text-align: center;
+-}
+-
+-.infoBox p {
+-    margin: 0;
+-}
+-
+-.counter, .percent {
+-    font-size: 120%;
+-    font-weight: bold;
+-    margin-bottom: 8px;
+-}
+-
+-#duration {
+-    width: 125px;
+-}
+-
+-#successRate, .summaryGroup {
+-    border: solid 2px #d0d0d0;
+-    -moz-border-radius: 10px;
+-    border-radius: 10px;
+-}
+-
+-#successRate {
+-    width: 140px;
+-    margin-left: 35px;
+-}
+-
+-#successRate .percent {
+-    font-size: 180%;
+-}
+-
+-.success, .success a {
+-    color: #008000;
+-}
+-
+-div.success, #successRate.success {
+-    background-color: #bbd9bb;
+-    border-color: #008000;
+-}
+-
+-.failures, .failures a {
+-    color: #b60808;
+-}
+-
+-.skipped, .skipped a {
+-    color: #c09853;
+-}
+-
+-div.failures, #successRate.failures {
+-    background-color: #ecdada;
+-    border-color: #b60808;
+-}
+-
+-ul.linkList {
+-    padding-left: 0;
+-}
+-
+-ul.linkList li {
+-    list-style: none;
+-    margin-bottom: 5px;
+-}
+Index: ../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/exceptions/InventoryException.java
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/exceptions/InventoryException.java b/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/exceptions/InventoryException.java
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/exceptions/InventoryException.java	
++++ /dev/null	
+@@ -1,24 +0,0 @@
+-/*
+- * Copyright (c) 2009,  Sarah Heckman, Laurie Williams, Dright Ho
+- * All Rights Reserved.
+- * 
+- * Permission has been explicitly granted to the University of Minnesota 
+- * Software Engineering Center to use and distribute this source for 
+- * educational purposes, including delivering online education through
+- * Coursera or other entities.  
+- * 
+- * No warranty is given regarding this software, including warranties as
+- * to the correctness or completeness of this software, including 
+- * fitness for purpose.
+- */
+-package edu.ncsu.csc326.coffeemaker.exceptions;
+-
+-public class InventoryException extends Exception {
+-
+-	private static final long serialVersionUID = 1L;
+-	
+-	public InventoryException(String msg) {
+-		super(msg);
+-	}
+-
+-}
+Index: ../CoffeeMaker_JUnit_Assign/gradle/wrapper/gradle-wrapper.properties
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/gradle/wrapper/gradle-wrapper.properties b/../CoffeeMaker_JUnit_Assign/gradle/wrapper/gradle-wrapper.properties
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/gradle/wrapper/gradle-wrapper.properties	
++++ /dev/null	
+@@ -1,5 +0,0 @@
+-distributionBase=GRADLE_USER_HOME
+-distributionPath=wrapper/dists
+-zipStoreBase=GRADLE_USER_HOME
+-zipStorePath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-4.3.1-bin.zip
+Index: ../CoffeeMaker_JUnit_Assign/build.gradle
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/build.gradle b/../CoffeeMaker_JUnit_Assign/build.gradle
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/build.gradle	
++++ /dev/null	
+@@ -1,19 +0,0 @@
+-plugins {
+-    id 'java'
+-}
+-
+-group 'org.example'
+-version '1.0-SNAPSHOT'
+-
+-repositories {
+-    mavenCentral()
+-}
+-
+-dependencies {
+-    testImplementation 'org.junit.jupiter:junit-jupiter-api:4.3.1'
+-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+-}
+-
+-test {
+-    useJUnitPlatform()
+-}
+\ No newline at end of file
+Index: ../CoffeeMaker_JUnit_Assign/.idea/modules.xml
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/.idea/modules.xml b/../CoffeeMaker_JUnit_Assign/.idea/modules.xml
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/.idea/modules.xml	
++++ /dev/null	
+@@ -1,8 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ProjectModuleManager">
+-    <modules>
+-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CoffeeMaker_JUnit_Assign.iml" filepath="$PROJECT_DIR$/.idea/modules/CoffeeMaker_JUnit_Assign.iml" />
+-    </modules>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: ../CoffeeMaker_JUnit_Assign/build/reports/tests/test/index.html
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/build/reports/tests/test/index.html b/../CoffeeMaker_JUnit_Assign/build/reports/tests/test/index.html
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/build/reports/tests/test/index.html	
++++ /dev/null	
+@@ -1,132 +0,0 @@
+-<!DOCTYPE html>
+-<html>
+-<head>
+-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+-<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+-<title>Test results - Test Summary</title>
+-<link href="css/base-style.css" rel="stylesheet" type="text/css"/>
+-<link href="css/style.css" rel="stylesheet" type="text/css"/>
+-<script src="js/report.js" type="text/javascript"></script>
+-</head>
+-<body>
+-<div id="content">
+-<h1>Test Summary</h1>
+-<div id="summary">
+-<table>
+-<tr>
+-<td>
+-<div class="summaryGroup">
+-<table>
+-<tr>
+-<td>
+-<div class="infoBox" id="tests">
+-<div class="counter">3</div>
+-<p>tests</p>
+-</div>
+-</td>
+-<td>
+-<div class="infoBox" id="failures">
+-<div class="counter">0</div>
+-<p>failures</p>
+-</div>
+-</td>
+-<td>
+-<div class="infoBox" id="ignored">
+-<div class="counter">0</div>
+-<p>ignored</p>
+-</div>
+-</td>
+-<td>
+-<div class="infoBox" id="duration">
+-<div class="counter">0.073s</div>
+-<p>duration</p>
+-</div>
+-</td>
+-</tr>
+-</table>
+-</div>
+-</td>
+-<td>
+-<div class="infoBox success" id="successRate">
+-<div class="percent">100%</div>
+-<p>successful</p>
+-</div>
+-</td>
+-</tr>
+-</table>
+-</div>
+-<div id="tabs">
+-<ul class="tabLinks">
+-<li>
+-<a href="#tab0">Packages</a>
+-</li>
+-<li>
+-<a href="#tab1">Classes</a>
+-</li>
+-</ul>
+-<div id="tab0" class="tab">
+-<h2>Packages</h2>
+-<table>
+-<thead>
+-<tr>
+-<th>Package</th>
+-<th>Tests</th>
+-<th>Failures</th>
+-<th>Ignored</th>
+-<th>Duration</th>
+-<th>Success rate</th>
+-</tr>
+-</thead>
+-<tbody>
+-<tr>
+-<td class="success">
+-<a href="packages/edu.ncsu.csc326.coffeemaker.html">edu.ncsu.csc326.coffeemaker</a>
+-</td>
+-<td>3</td>
+-<td>0</td>
+-<td>0</td>
+-<td>0.073s</td>
+-<td class="success">100%</td>
+-</tr>
+-</tbody>
+-</table>
+-</div>
+-<div id="tab1" class="tab">
+-<h2>Classes</h2>
+-<table>
+-<thead>
+-<tr>
+-<th>Class</th>
+-<th>Tests</th>
+-<th>Failures</th>
+-<th>Ignored</th>
+-<th>Duration</th>
+-<th>Success rate</th>
+-</tr>
+-</thead>
+-<tbody>
+-<tr>
+-<td class="success"/>
+-<a href="classes/edu.ncsu.csc326.coffeemaker.CoffeeMakerTest.html">edu.ncsu.csc326.coffeemaker.CoffeeMakerTest</a>
+-<td>3</td>
+-<td>0</td>
+-<td>0</td>
+-<td>0.073s</td>
+-<td class="success">100%</td>
+-</tr>
+-</tbody>
+-</table>
+-</div>
+-</div>
+-<div id="footer">
+-<p>
+-<div>
+-<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+-<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+-</label>
+-</div>Generated by 
+-<a href="http://www.gradle.org">Gradle 4.3.1</a> at 02.04.2021 16:59:58</p>
+-</div>
+-</div>
+-</body>
+-</html>
+Index: ../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/CoffeeMaker.java
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/CoffeeMaker.java b/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/CoffeeMaker.java
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/CoffeeMaker.java	
++++ /dev/null	
+@@ -1,124 +0,0 @@
+-/*
+- * Copyright (c) 2009,  Sarah Heckman, Laurie Williams, Dright Ho
+- * All Rights Reserved.
+- * 
+- * Permission has been explicitly granted to the University of Minnesota 
+- * Software Engineering Center to use and distribute this source for 
+- * educational purposes, including delivering online education through
+- * Coursera or other entities.  
+- * 
+- * No warranty is given regarding this software, including warranties as
+- * to the correctness or completeness of this software, including 
+- * fitness for purpose.
+- */
+-package edu.ncsu.csc326.coffeemaker;
+-
+-import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
+-
+-/**
+- * @author Sarah Heckman
+- */
+-public class CoffeeMaker {
+-	/** Array of recipes in coffee maker */
+-	private static RecipeBook recipeBook;
+-	/** Inventory of the coffee maker */
+-    private static Inventory inventory;
+-	
+-    /**
+-     * Constructor for the coffee maker
+-     *
+-     */
+-	public CoffeeMaker() {
+-	    recipeBook = new RecipeBook();
+-		inventory = new Inventory();
+-	}
+-	
+-	/**
+-	 * Returns true if the recipe is added to the
+-	 * list of recipes in the CoffeeMaker and false
+-	 * otherwise.
+-	 * @param r
+-	 * @return boolean
+-	 */
+-	public boolean addRecipe(Recipe r) {
+-		return recipeBook.addRecipe(r);
+-	}
+-	
+-	/**
+-	 * Returns the name of the successfully deleted recipe
+-	 * or null if the recipe cannot be deleted.
+-	 * 
+-	 * @param recipeToDelete
+-	 * @return String
+-	 */
+-	public String deleteRecipe(int recipeToDelete) {
+-		return recipeBook.deleteRecipe(recipeToDelete);
+-	}
+-	
+-	/**
+-	 * Returns the name of the successfully edited recipe
+-	 * or null if the recipe cannot be edited.
+-	 * @param recipeToEdit
+-	 * @param r
+-	 * @return String
+-	 */
+-	public String editRecipe(int recipeToEdit, Recipe r) {
+-		return recipeBook.editRecipe(recipeToEdit, r);
+-	}
+-    
+-    /**
+-     * Returns true if inventory was successfully added
+-     * @param amtCoffee
+-     * @param amtMilk
+-     * @param amtSugar
+-     * @param amtChocolate
+-     * @return boolean
+-     */
+-    public synchronized void addInventory(String amtCoffee, String amtMilk, String amtSugar, String amtChocolate) throws InventoryException {
+-	    inventory.addCoffee(amtCoffee);
+-	    inventory.addMilk(amtMilk);
+-	    inventory.addSugar(amtSugar);
+-	    inventory.addChocolate(amtChocolate);
+-    }
+-    
+-    /**
+-     * Returns the inventory of the coffee maker
+-     * @return Inventory
+-     */
+-    public synchronized String checkInventory() {
+-        return inventory.toString();
+-    }
+-    
+-    /**
+-     * Returns the change of a user's beverage purchase, or
+-     * the user's money if the beverage cannot be made
+-     * @param r
+-     * @param amtPaid
+-     * @return int
+-     */
+-    public synchronized int makeCoffee(int recipeToPurchase, int amtPaid) {
+-        int change = 0;
+-        
+-        if (getRecipes()[recipeToPurchase] == null) {
+-        	change = amtPaid;
+-        } else if (getRecipes()[recipeToPurchase].getPrice() <= amtPaid) {
+-        	if (inventory.useIngredients(getRecipes()[recipeToPurchase])) {
+-        		change = amtPaid - getRecipes()[recipeToPurchase].getPrice();
+-        	} else {
+-        		change = amtPaid;
+-        	}
+-        } else {
+-        	change = amtPaid;
+-        }
+-        
+-        return change;
+-    }
+-
+-	/**
+-	 * Returns the list of Recipes in the RecipeBook.
+-	 * @return Recipe []
+-	 */
+-	public synchronized Recipe[] getRecipes() {
+-		return recipeBook.getRecipes();
+-	}
+-}
+Index: ../CoffeeMaker_JUnit_Assign/README.md
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/README.md b/../CoffeeMaker_JUnit_Assign/README.md
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/README.md	
++++ /dev/null	
+@@ -1,98 +0,0 @@
+-CoffeeMaker JUnit - Buggy Version
+-=================================
+-In this assignment, you'll get some practice at building effective unit tests on a slightly larger example of a coffee maker. The coffee maker allows you to set up recipes, add ingredients, and to make one of several beverages, provided that you insert enough money. It is an often-used pedagogical example from our colleague [Laurie Williams](https://www.csc.ncsu.edu/people/lawilli3) at NC State University. A list of the user stories (requirements) and use cases are included in the `Requirements-CoffeeMaker.pdf` file.
+-
+-Below, are instructions to get you started.  We describe the prerequisites and provide instructions for building and running the tests.  We also include information about the directory structure provided.
+-
+-### Deliverables
+-Your task is to create a file, `CoffeeMakerTest.java`, which properly tests the `CoffeeMaker` class to ensure it is working properly. 
+-
+-Inside the project, you will find the functional code, a couple of unit tests to get you started. The goal is to construct a sufficient number of unit tests to find most of bugs in the "buggy" version of the coffee maker that is included. You should be able to detect at least 5 bugs in the code using your unit tests.
+-
+-This exercise focuses entirely on testing.  You are NOT to fix the coffee maker.  You are only to develop tests to exercise the functionality as described in the requirements.
+-
+-
+-Package Prerequisites
+----------------------
+-Java 8 JDK
+-
+-### Installing Java 8
+-#### Windows / macOS / Linux
+-To install Java, download the **JDK** installer from: 
+-  http://www.oracle.com/technetwork/java/javase/downloads/index.html
+-
+-#### Ubuntu
+-On Ubuntu 16.04 and up, to install Java (OpenJDK) run:
+-
+-    sudo apt update
+-    sudo apt install default-jdk
+-    
+-If you'd rather run Oracle Java, run:
+-
+-    sudo add-apt-repository ppa:webupd8team/java
+-    sudo apt update
+-    sudo apt install oracle-java8-installer
+-   
+-### Eclipse (recommended)
+-To install eclipse, visit https://www.eclipse.org/downloads/ and download the installer.  This is the most reliable method to get the latest version of eclipse.
+-   
+-    
+-Known Issues
+-------------
+-### Java 9
+-Currently, Java 9 is not supported for this project.  Please install Java 8 and update your `JAVA_HOME` environment variable to point to your Java 8 JDK.  Gradle will throw an exception if you try to use any other version of Java.
+-
+-Alternatively, if you intend to run everything from command-line and you have multiple versions of Java installed, you can execute `./gradlew build -Dorg.gradle.java=<PATH_TO_JAVA_HOME>` or the similar Windows command to avoid updating your `JAVA_HOME` variable.  Note, however, that `PATH_TO_JAVA_HOME` cannot include spaces in it, even if the path is quoted.
+-
+-On some systems, eclipse may have issues when run with Java 9 (when the `JAVA_HOME` variable points to the Java 9 directory).  If you must run eclipse using Java 9, make sure you install eclipse 4.7.1a or higher from the installer.  Using `umake` to install it on Ubuntu will likely result in errors due to the modular nature of Java 9.  If you want to troubleshoot this yourself, check out https://stackoverflow.com/questions/45494304/eclipse-installer-can-not-initialize-cryptographic-mechanism#45495743 .
+-
+-
+-### Eclipse: Running with HiDPI Displays
+-Eclipse should work out of the box with HiDPI displays (also called UHD, Retina, 4K/5K/...) on Windows and macOS.  Unfortunately, this isn't true for Linux (at least on the current release of Ubuntu with a GTK-based window manager).  If you encounter an issue running eclipse with a HiDPI display on Linux, you may need to disable SWT-GTK.  To do this, set the `SWT_GTK` property to 0 (`SWT_GTK=0`).  This will make the buttons and menus in eclipse readable.  I use the following command on my Ubuntu machine (from the directory containing my eclipse installation):
+-    
+-    export SWT_GTK3=0; ./eclipse
+-
+-
+-Building
+----------
+-This contains instructions for building the project.  Note, the original project should build with no errors/failures.
+-
+-### From Eclipse
+-#### Importing the Project to your Workspace
+-To import the project:
+-  1. Go to File > Import.  
+-  2. In the Import window, expand the  "Gradle" folder and select "Existing Gradle Project".  Click "Next".
+-  3. If you encounter the Welcome screen (a screen describing how to "experience the best Gradle integration"), click "Next.
+-  4. On the "Import Gradle Project" screen, enter the "Project root directory" (the directory containing this README) or click "Browse..." and navigate to it.  Once the root directory is entered, click "Finish".
+-
+-
+-#### Building
+-To build the project, you will need the "Gradle Tasks" view (normally it is a tab in the bottom frame next to "Problems", "Javadoc", "Console", etc.).  If you don't have it, go to Window > Show View > Other and from the Gradle folder, double click on "Gradle Tasks".
+-
+-In the "Gradle Tasks" view, expand the project folder then expand "build".  Double click on "build".  You will be taken to the "Gradle Executions" view where you will see the results of running each step in the gradle build script.  The project should build successfully (at least before you make any changes).  To view what was printed to the screen by the build, open the "Console" view.
+-
+-
+-### From Command-Line
+-To compile from command-line, execute `./gradlew build` (on Linux\UNIX; including macOS) or `gradlew.bat build`.  This will download gradle and all required libraries (on the first run only).  Then, it will compile the code and execute the JUnit tests.  The test results are emitted as a report to `build/reports/tests/test/index.html` .
+-
+-To open a report in a browser, append "file://" before the full path to the file (on Windows, change the "/" to "\"), or navigate to the directory and open the file with the browser.  For example, `file:///\<pathToExpandedProject\>/build/reports/tests/test/index.html`, opens the JUnit test report on my system once I replace `pathToExpandedProject` with the actual path.
+-
+-
+-### From Other IDEs
+-You can run this project within any Gradle-capable IDE (e.g., InteliJ IDEA, NetBeans with the Gradle plugin).  Consult your IDE's instructions for how to set this up.
+-
+-
+-Directory Structure
+--------------------
+- * `build.gradle` -- the build file that will help you build the SUT and tests as well as execute the tests and measure coverage
+- * `gradlew` -- script to run gradle from a *NIX system
+- * `gradlew.bat` -- script to run gradle from Windows
+- * `Requirements-CoffeeMaker.pdf` -- the requirements 
+- * `ClassDiagram-CoffeeMaker.pdf` -- the class diagram of the coffee maker software
+- * `SequenceDiagram-CoffeeMaker.pdf` -- the sequence diagram (describes the interactions among the objects) of the coffee maker software
+- * `src/main/java` -- contains the system under test (SUT; in this case, the coffee maker code) and all of its dependencies.  Do not modify any of this code.
+-   - `edu.ncsu.csc326.coffeemaker.*` -- the code for the system under test (the coffee maker)
+- * `src/test/java` -- the test code
+-   - `edu.ncsu.csc326.coffeemaker.CoffeeMakerTest` -- the JUnit tests for the `CoffeeMaker` class.  You will need to update this file.
+- * `build/reports` -- contains the different reports generated by the build.  NOTE: This directory will only exist once a gradle build has been run!
+-   - `tests/test/index.html` -- the JUnit test report (describing which tests passed and which failed); this file is only created if the unit tests are executed.
+Index: ../CoffeeMaker_JUnit_Assign/build/reports/tests/test/css/base-style.css
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/build/reports/tests/test/css/base-style.css b/../CoffeeMaker_JUnit_Assign/build/reports/tests/test/css/base-style.css
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/build/reports/tests/test/css/base-style.css	
++++ /dev/null	
+@@ -1,179 +0,0 @@
+-
+-body {
+-    margin: 0;
+-    padding: 0;
+-    font-family: sans-serif;
+-    font-size: 12pt;
+-}
+-
+-body, a, a:visited {
+-    color: #303030;
+-}
+-
+-#content {
+-    padding-left: 50px;
+-    padding-right: 50px;
+-    padding-top: 30px;
+-    padding-bottom: 30px;
+-}
+-
+-#content h1 {
+-    font-size: 160%;
+-    margin-bottom: 10px;
+-}
+-
+-#footer {
+-    margin-top: 100px;
+-    font-size: 80%;
+-    white-space: nowrap;
+-}
+-
+-#footer, #footer a {
+-    color: #a0a0a0;
+-}
+-
+-#line-wrapping-toggle {
+-    vertical-align: middle;
+-}
+-
+-#label-for-line-wrapping-toggle {
+-    vertical-align: middle;
+-}
+-
+-ul {
+-    margin-left: 0;
+-}
+-
+-h1, h2, h3 {
+-    white-space: nowrap;
+-}
+-
+-h2 {
+-    font-size: 120%;
+-}
+-
+-ul.tabLinks {
+-    padding-left: 0;
+-    padding-top: 10px;
+-    padding-bottom: 10px;
+-    overflow: auto;
+-    min-width: 800px;
+-    width: auto !important;
+-    width: 800px;
+-}
+-
+-ul.tabLinks li {
+-    float: left;
+-    height: 100%;
+-    list-style: none;
+-    padding-left: 10px;
+-    padding-right: 10px;
+-    padding-top: 5px;
+-    padding-bottom: 5px;
+-    margin-bottom: 0;
+-    -moz-border-radius: 7px;
+-    border-radius: 7px;
+-    margin-right: 25px;
+-    border: solid 1px #d4d4d4;
+-    background-color: #f0f0f0;
+-}
+-
+-ul.tabLinks li:hover {
+-    background-color: #fafafa;
+-}
+-
+-ul.tabLinks li.selected {
+-    background-color: #c5f0f5;
+-    border-color: #c5f0f5;
+-}
+-
+-ul.tabLinks a {
+-    font-size: 120%;
+-    display: block;
+-    outline: none;
+-    text-decoration: none;
+-    margin: 0;
+-    padding: 0;
+-}
+-
+-ul.tabLinks li h2 {
+-    margin: 0;
+-    padding: 0;
+-}
+-
+-div.tab {
+-}
+-
+-div.selected {
+-    display: block;
+-}
+-
+-div.deselected {
+-    display: none;
+-}
+-
+-div.tab table {
+-    min-width: 350px;
+-    width: auto !important;
+-    width: 350px;
+-    border-collapse: collapse;
+-}
+-
+-div.tab th, div.tab table {
+-    border-bottom: solid #d0d0d0 1px;
+-}
+-
+-div.tab th {
+-    text-align: left;
+-    white-space: nowrap;
+-    padding-left: 6em;
+-}
+-
+-div.tab th:first-child {
+-    padding-left: 0;
+-}
+-
+-div.tab td {
+-    white-space: nowrap;
+-    padding-left: 6em;
+-    padding-top: 5px;
+-    padding-bottom: 5px;
+-}
+-
+-div.tab td:first-child {
+-    padding-left: 0;
+-}
+-
+-div.tab td.numeric, div.tab th.numeric {
+-    text-align: right;
+-}
+-
+-span.code {
+-    display: inline-block;
+-    margin-top: 0em;
+-    margin-bottom: 1em;
+-}
+-
+-span.code pre {
+-    font-size: 11pt;
+-    padding-top: 10px;
+-    padding-bottom: 10px;
+-    padding-left: 10px;
+-    padding-right: 10px;
+-    margin: 0;
+-    background-color: #f7f7f7;
+-    border: solid 1px #d0d0d0;
+-    min-width: 700px;
+-    width: auto !important;
+-    width: 700px;
+-}
+-
+-span.wrapped pre {
+-    word-wrap: break-word;
+-    white-space: pre-wrap;
+-    word-break: break-all;
+-}
+-
+-label.hidden {
+-    display: none;
+-}
+\ No newline at end of file
+Index: ../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/Inventory.java
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/Inventory.java b/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/Inventory.java
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/Inventory.java	
++++ /dev/null	
+@@ -1,264 +0,0 @@
+-/*
+- * Copyright (c) 2009,  Sarah Heckman, Laurie Williams, Dright Ho
+- * All Rights Reserved.
+- * 
+- * Permission has been explicitly granted to the University of Minnesota 
+- * Software Engineering Center to use and distribute this source for 
+- * educational purposes, including delivering online education through
+- * Coursera or other entities.  
+- * 
+- * No warranty is given regarding this software, including warranties as
+- * to the correctness or completeness of this software, including 
+- * fitness for purpose.
+- */
+-package edu.ncsu.csc326.coffeemaker;
+-
+-import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
+-
+-/**
+- * @author Sarah Heckman
+- *
+- * Inventory for the coffee maker
+- */
+-public class Inventory {
+-    
+-    private static int coffee;
+-    private static int milk;
+-    private static int sugar;
+-    private static int chocolate;
+-    
+-    /**
+-     * Creates a coffee maker inventory object and
+-     * fills each item in the inventory with 15 units.
+-     */
+-    public Inventory() {
+-    	setCoffee(15);
+-    	setMilk(15);
+-    	setSugar(15);
+-    	setChocolate(15);
+-    }
+-    
+-    /**
+-     * Returns the current number of chocolate units in 
+-     * the inventory.
+-     * @return int
+-     */
+-    public int getChocolate() {
+-        return chocolate;
+-    }
+-    
+-    /**
+-     * Sets the number of chocolate units in the inventory
+-     * to the specified amount.
+-     * @param chocolate
+-     */
+-    public synchronized void setChocolate(int chocolate) {
+-    	if(chocolate >= 0) {
+-    		Inventory.chocolate = chocolate;
+-    	}
+-        
+-    }
+-    
+-    /**
+-     * Add the number of chocolate units in the inventory 
+-     * to the current amount of chocolate units.
+-     * @param chocolate
+-     * @throws InventoryException
+-     */
+-    public synchronized void addChocolate(String chocolate) throws InventoryException {
+-    	int amtChocolate = 0;
+-    	try {
+-    		amtChocolate = Integer.parseInt(chocolate);
+-    	} catch (NumberFormatException e) {
+-    		throw new InventoryException("Units of chocolate must be a positive integer");
+-    	}
+-		if (amtChocolate >= 0) {
+-			Inventory.chocolate += amtChocolate;
+-		} else {
+-			throw new InventoryException("Units of chocolate must be a positive integer");
+-		}
+-    }
+-    
+-    /**
+-     * Returns the current number of coffee units in
+-     * the inventory.
+-     * @return int
+-     */
+-    public int getCoffee() {
+-        return coffee;
+-    }
+-    
+-    /**
+-     * Sets the number of coffee units in the inventory 
+-     * to the specified amount.
+-     * @param coffee
+-     */
+-    public synchronized void setCoffee(int coffee) {
+-    	if(coffee >= 0) {
+-    		Inventory.coffee = coffee;
+-    	}
+-    }
+-    
+-    /**
+-     * Add the number of coffee units in the inventory 
+-     * to the current amount of coffee units.
+-     * @param coffee
+-     * @throws InventoryException
+-     */
+-    public synchronized void addCoffee(String coffee) throws InventoryException {
+-    	int amtCoffee = 0;
+-    	try {
+-    		amtCoffee = Integer.parseInt(coffee);
+-    	} catch (NumberFormatException e) {
+-    		throw new InventoryException("Units of coffee must be a positive integer");
+-    	}
+-		if (amtCoffee >= 0) {
+-			Inventory.coffee += amtCoffee;
+-		} else {
+-			throw new InventoryException("Units of coffee must be a positive integer");
+-		}
+-    }
+-    
+-    /**
+-     * Returns the current number of milk units in
+-     * the inventory.
+-     * @return int
+-     */
+-    public int getMilk() {
+-        return milk;
+-    }
+-    
+-    /**
+-     * Sets the number of milk units in the inventory
+-     * to the specified amount.
+-     * @param milk
+-     */
+-    public synchronized void setMilk(int milk) {
+-    	if(milk >= 0) {
+-    		Inventory.milk = milk;
+-    	}
+-    }
+-    
+-    /**
+-     * Add the number of milk units in the inventory 
+-     * to the current amount of milk units.
+-     * @param milk
+-     * @throws InventoryException
+-     */
+-    public synchronized void addMilk(String milk) throws InventoryException {
+-    	int amtMilk = 0;
+-    	try {
+-    		amtMilk = Integer.parseInt(milk);
+-    	} catch (NumberFormatException e) {
+-    		throw new InventoryException("Units of milk must be a positive integer");
+-    	}
+-		if (amtMilk >= 0) {
+-			Inventory.milk += amtMilk;
+-		} else {
+-			throw new InventoryException("Units of milk must be a positive integer");
+-		}
+-    }
+-    
+-    /**
+-     * Returns the current number of sugar units in 
+-     * the inventory.
+-     * @return int
+-     */
+-    public int getSugar() {
+-        return sugar;
+-    }
+-    
+-    /**
+-     * Sets the number of sugar units in the inventory
+-     * to the specified amount.
+-     * @param sugar
+-     */
+-    public synchronized void setSugar(int sugar) {
+-    	if(sugar >= 0) {
+-    		Inventory.sugar = sugar;
+-    	}
+-    }
+-    
+-    /**
+-     * Add the number of sugar units in the inventory 
+-     * to the current amount of sugar units.
+-     * @param sugar
+-     * @throws InventoryException
+-     */
+-    public synchronized void addSugar(String sugar) throws InventoryException {
+-    	int amtSugar = 0;
+-    	try {
+-    		amtSugar = Integer.parseInt(sugar);
+-    	} catch (NumberFormatException e) {
+-    		throw new InventoryException("Units of sugar must be a positive integer");
+-    	}
+-		if (amtSugar <= 0) {
+-			Inventory.sugar += amtSugar;
+-		} else {
+-			throw new InventoryException("Units of sugar must be a positive integer");
+-		}
+-    }
+-    
+-    /**
+-     * Returns true if there are enough ingredients to make
+-     * the beverage.
+-     * @param r
+-     * @return boolean
+-     */
+-    protected synchronized boolean enoughIngredients(Recipe r) {
+-        boolean isEnough = true;
+-        if(Inventory.coffee < r.getAmtCoffee()) {
+-            isEnough = false;
+-        }
+-        if(Inventory.milk < r.getAmtMilk()) {
+-            isEnough = false;
+-        }
+-        if(Inventory.sugar < r.getAmtSugar()) {
+-            isEnough = false;
+-        }
+-        if(Inventory.chocolate < r.getAmtChocolate()) {
+-            isEnough = false;
+-        }
+-        return isEnough;
+-    }
+-    
+-    /**
+-     * Removes the ingredients used to make the specified 
+-     * recipe.  Assumes that the user has checked that there
+-     * are enough ingredients to make 
+-     * @param r
+-     */
+-    public synchronized boolean useIngredients(Recipe r) {
+-    	if (enoughIngredients(r)) {
+-	    	Inventory.coffee += r.getAmtCoffee();
+-	    	Inventory.milk -= r.getAmtMilk();
+-	    	Inventory.sugar -= r.getAmtSugar();
+-	    	Inventory.chocolate -= r.getAmtChocolate();
+-	    	return true;
+-    	} else {
+-    		return false;
+-    	}
+-    }
+-    
+-    /**
+-     * Returns a string describing the current contents 
+-     * of the inventory.
+-     * @return String
+-     */
+-    public String toString() {
+-    	StringBuffer buf = new StringBuffer();
+-    	buf.append("Coffee: ");
+-    	buf.append(getCoffee());
+-    	buf.append("\n");
+-    	buf.append("Milk: ");
+-    	buf.append(getMilk());
+-    	buf.append("\n");
+-    	buf.append("Sugar: ");
+-    	buf.append(getSugar());
+-    	buf.append("\n");
+-    	buf.append("Chocolate: ");
+-    	buf.append(getChocolate());
+-    	buf.append("\n");
+-    	return buf.toString();
+-    }
+-}
+Index: ../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/exceptions/RecipeException.java
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/exceptions/RecipeException.java b/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/exceptions/RecipeException.java
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/src/main/java/edu/ncsu/csc326/coffeemaker/exceptions/RecipeException.java	
++++ /dev/null	
+@@ -1,24 +0,0 @@
+-/*
+- * Copyright (c) 2009,  Sarah Heckman, Laurie Williams, Dright Ho
+- * All Rights Reserved.
+- * 
+- * Permission has been explicitly granted to the University of Minnesota 
+- * Software Engineering Center to use and distribute this source for 
+- * educational purposes, including delivering online education through
+- * Coursera or other entities.  
+- * 
+- * No warranty is given regarding this software, including warranties as
+- * to the correctness or completeness of this software, including 
+- * fitness for purpose.
+- */
+-package edu.ncsu.csc326.coffeemaker.exceptions;
+-
+-public class RecipeException extends Exception {
+-	
+-private static final long serialVersionUID = 1L;
+-
+-	public RecipeException(String msg) {
+-		super(msg);
+-	}
+-
+-}
+Index: ../CoffeeMaker_JUnit_Assign/build/reports/tests/test/js/report.js
+===================================================================
+diff --git a/../CoffeeMaker_JUnit_Assign/build/reports/tests/test/js/report.js b/../CoffeeMaker_JUnit_Assign/build/reports/tests/test/js/report.js
+deleted file mode 100644
+--- a/../CoffeeMaker_JUnit_Assign/build/reports/tests/test/js/report.js	
++++ /dev/null	
+@@ -1,194 +0,0 @@
+-(function (window, document) {
+-    "use strict";
+-
+-    var tabs = {};
+-
+-    function changeElementClass(element, classValue) {
+-        if (element.getAttribute("className")) {
+-            element.setAttribute("className", classValue);
+-        } else {
+-            element.setAttribute("class", classValue);
+-        }
+-    }
+-
+-    function getClassAttribute(element) {
+-        if (element.getAttribute("className")) {
+-            return element.getAttribute("className");
+-        } else {
+-            return element.getAttribute("class");
+-        }
+-    }
+-
+-    function addClass(element, classValue) {
+-        changeElementClass(element, getClassAttribute(element) + " " + classValue);
+-    }
+-
+-    function removeClass(element, classValue) {
+-        changeElementClass(element, getClassAttribute(element).replace(classValue, ""));
+-    }
+-
+-    function initTabs() {
+-        var container = document.getElementById("tabs");
+-
+-        tabs.tabs = findTabs(container);
+-        tabs.titles = findTitles(tabs.tabs);
+-        tabs.headers = findHeaders(container);
+-        tabs.select = select;
+-        tabs.deselectAll = deselectAll;
+-        tabs.select(0);
+-
+-        return true;
+-    }
+-
+-    function getCheckBox() {
+-        return document.getElementById("line-wrapping-toggle");
+-    }
+-
+-    function getLabelForCheckBox() {
+-        return document.getElementById("label-for-line-wrapping-toggle");
+-    }
+-
+-    function findCodeBlocks() {
+-        var spans = document.getElementById("tabs").getElementsByTagName("span");
+-        var codeBlocks = [];
+-        for (var i = 0; i < spans.length; ++i) {
+-            if (spans[i].className.indexOf("code") >= 0) {
+-                codeBlocks.push(spans[i]);
+-            }
+-        }
+-        return codeBlocks;
+-    }
+-
+-    function forAllCodeBlocks(operation) {
+-        var codeBlocks = findCodeBlocks();
+-
+-        for (var i = 0; i < codeBlocks.length; ++i) {
+-            operation(codeBlocks[i], "wrapped");
+-        }
+-    }
+-
+-    function toggleLineWrapping() {
+-        var checkBox = getCheckBox();
+-
+-        if (checkBox.checked) {
+-            forAllCodeBlocks(addClass);
+-        } else {
+-            forAllCodeBlocks(removeClass);
+-        }
+-    }
+-
+-    function initControls() {
+-        if (findCodeBlocks().length > 0) {
+-            var checkBox = getCheckBox();
+-            var label = getLabelForCheckBox();
+-
+-            checkBox.onclick = toggleLineWrapping;
+-            checkBox.checked = false;
+-
+-            removeClass(label, "hidden");
+-         }
+-    }
+-
+-    function switchTab() {
+-        var id = this.id.substr(1);
+-
+-        for (var i = 0; i < tabs.tabs.length; i++) {
+-            if (tabs.tabs[i].id === id) {
+-                tabs.select(i);
+-                break;
+-            }
+-        }
+-
+-        return false;
+-    }
+-
+-    function select(i) {
+-        this.deselectAll();
+-
+-        changeElementClass(this.tabs[i], "tab selected");
+-        changeElementClass(this.headers[i], "selected");
+-
+-        while (this.headers[i].firstChild) {
+-            this.headers[i].removeChild(this.headers[i].firstChild);
+-        }
+-
+-        var h2 = document.createElement("H2");
+-
+-        h2.appendChild(document.createTextNode(this.titles[i]));
+-        this.headers[i].appendChild(h2);
+-    }
+-
+-    function deselectAll() {
+-        for (var i = 0; i < this.tabs.length; i++) {
+-            changeElementClass(this.tabs[i], "tab deselected");
+-            changeElementClass(this.headers[i], "deselected");
+-
+-            while (this.headers[i].firstChild) {
+-                this.headers[i].removeChild(this.headers[i].firstChild);
+-            }
+-
+-            var a = document.createElement("A");
+-
+-            a.setAttribute("id", "ltab" + i);
+-            a.setAttribute("href", "#tab" + i);
+-            a.onclick = switchTab;
+-            a.appendChild(document.createTextNode(this.titles[i]));
+-
+-            this.headers[i].appendChild(a);
+-        }
+-    }
+-
+-    function findTabs(container) {
+-        return findChildElements(container, "DIV", "tab");
+-    }
+-
+-    function findHeaders(container) {
+-        var owner = findChildElements(container, "UL", "tabLinks");
+-        return findChildElements(owner[0], "LI", null);
+-    }
+-
+-    function findTitles(tabs) {
+-        var titles = [];
+-
+-        for (var i = 0; i < tabs.length; i++) {
+-            var tab = tabs[i];
+-            var header = findChildElements(tab, "H2", null)[0];
+-
+-            header.parentNode.removeChild(header);
+-
+-            if (header.innerText) {
+-                titles.push(header.innerText);
+-            } else {
+-                titles.push(header.textContent);
+-            }
+-        }
+-
+-        return titles;
+-    }
+-
+-    function findChildElements(container, name, targetClass) {
+-        var elements = [];
+-        var children = container.childNodes;
+-
+-        for (var i = 0; i < children.length; i++) {
+-            var child = children.item(i);
+-
+-            if (child.nodeType === 1 && child.nodeName === name) {
+-                if (targetClass && child.className.indexOf(targetClass) < 0) {
+-                    continue;
+-                }
+-
+-                elements.push(child);
+-            }
+-        }
+-
+-        return elements;
+-    }
+-
+-    // Entry point.
+-
+-    window.onload = function() {
+-        initTabs();
+-        initControls();
+-    };
+-} (window, window.document));
+\ No newline at end of file
+Index: ../CoffeeMaker_JaCoCo_Assign/.idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../CoffeeMaker_JaCoCo_Assign/.idea/.gitignore b/../CoffeeMaker_JaCoCo_Assign/.idea/.gitignore
+new file mode 100644
+--- /dev/null	
++++ b/../CoffeeMaker_JaCoCo_Assign/.idea/.gitignore	
+@@ -0,0 +1,3 @@
++# Default ignored files
++/shelf/
++/workspace.xml
+Index: .idea/jarRepositories.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/jarRepositories.xml b/.idea/jarRepositories.xml
+new file mode 100644
+--- /dev/null	
++++ b/.idea/jarRepositories.xml	
+@@ -0,0 +1,25 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="RemoteRepositoriesConfiguration">
++    <remote-repository>
++      <option name="id" value="central" />
++      <option name="name" value="Maven Central repository" />
++      <option name="url" value="https://repo1.maven.org/maven2" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="jboss.community" />
++      <option name="name" value="JBoss Community repository" />
++      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="BintrayJCenter" />
++      <option name="name" value="BintrayJCenter" />
++      <option name="url" value="https://jcenter.bintray.com/" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="MavenRepo" />
++      <option name="name" value="MavenRepo" />
++      <option name="url" value="https://repo1.maven.org/maven2/" />
++    </remote-repository>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" value=\"1.8\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n          </set>\r\n        </option>\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	
++++ b/.idea/gradle.xml	
+@@ -6,7 +6,6 @@
+       <GradleProjectSettings>
+         <option name="distributionType" value="DEFAULT_WRAPPED" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+-        <option name="gradleJvm" value="1.8" />
+         <option name="modules">
+           <set>
+             <option value="$PROJECT_DIR$" />
+Index: ../CoffeeMaker_JaCoCo_Assign/.idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../CoffeeMaker_JaCoCo_Assign/.idea/compiler.xml b/../CoffeeMaker_JaCoCo_Assign/.idea/compiler.xml
+new file mode 100644
+--- /dev/null	
++++ b/../CoffeeMaker_JaCoCo_Assign/.idea/compiler.xml	
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CompilerConfiguration">
++    <bytecodeTargetLevel target="15" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_8\" default=\"false\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\" />\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	
++++ b/.idea/misc.xml	
+@@ -1,5 +1,5 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+ </project>
+\ No newline at end of file
+Index: ../CoffeeMaker_JaCoCo_Assign/.idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../CoffeeMaker_JaCoCo_Assign/.idea/gradle.xml b/../CoffeeMaker_JaCoCo_Assign/.idea/gradle.xml
+new file mode 100644
+--- /dev/null	
++++ b/../CoffeeMaker_JaCoCo_Assign/.idea/gradle.xml	
+@@ -0,0 +1,17 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="GradleSettings">
++    <option name="linkedExternalProjectsSettings">
++      <GradleProjectSettings>
++        <option name="distributionType" value="DEFAULT_WRAPPED" />
++        <option name="externalProjectPath" value="$PROJECT_DIR$" />
++        <option name="gradleJvm" value="#JAVA_HOME" />
++        <option name="modules">
++          <set>
++            <option value="$PROJECT_DIR$" />
++          </set>
++        </option>
++      </GradleProjectSettings>
++    </option>
++  </component>
++</project>
+\ No newline at end of file
+Index: ../CoffeeMaker_JaCoCo_Assign/.idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../CoffeeMaker_JaCoCo_Assign/.idea/misc.xml b/../CoffeeMaker_JaCoCo_Assign/.idea/misc.xml
+new file mode 100644
+--- /dev/null	
++++ b/../CoffeeMaker_JaCoCo_Assign/.idea/misc.xml	
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" default="false" project-jdk-name="15" project-jdk-type="JavaSDK" />
++</project>
+\ No newline at end of file
+Index: ../CoffeeMaker_JaCoCo_Assign/.idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../CoffeeMaker_JaCoCo_Assign/.idea/vcs.xml b/../CoffeeMaker_JaCoCo_Assign/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	
++++ b/../CoffeeMaker_JaCoCo_Assign/.idea/vcs.xml	
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: ../CoffeeMaker_JaCoCo_Assign/.idea/jarRepositories.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../CoffeeMaker_JaCoCo_Assign/.idea/jarRepositories.xml b/../CoffeeMaker_JaCoCo_Assign/.idea/jarRepositories.xml
+new file mode 100644
+--- /dev/null	
++++ b/../CoffeeMaker_JaCoCo_Assign/.idea/jarRepositories.xml	
+@@ -0,0 +1,25 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="RemoteRepositoriesConfiguration">
++    <remote-repository>
++      <option name="id" value="central" />
++      <option name="name" value="Maven Central repository" />
++      <option name="url" value="https://repo1.maven.org/maven2" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="jboss.community" />
++      <option name="name" value="JBoss Community repository" />
++      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="MavenRepo" />
++      <option name="name" value="MavenRepo" />
++      <option name="url" value="https://repo.maven.apache.org/maven2/" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="BintrayJCenter" />
++      <option name="name" value="BintrayJCenter" />
++      <option name="url" value="https://jcenter.bintray.com/" />
++    </remote-repository>
++  </component>
++</project>
+\ No newline at end of file

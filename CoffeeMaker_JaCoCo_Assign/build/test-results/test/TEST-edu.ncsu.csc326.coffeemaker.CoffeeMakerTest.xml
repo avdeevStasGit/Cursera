@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-04-26T16:31:11" hostname="IDEA-PC" time="93.557">
+  <properties/>
+  <testcase name="testEditRecipe" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="93.557"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
