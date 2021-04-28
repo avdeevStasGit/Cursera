@@ -17,9 +17,11 @@
  */
 package edu.ncsu.csc326.coffeemaker;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
+import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -60,7 +62,7 @@ public class CoffeeMakerTest {
 	
 	
 	//-----------------------------------------------------------------------
-	//	Set-up // Tear-down
+	//	Set-up / Tear-down
 	//-----------------------------------------------------------------------
 	/**
 	 * Initializes some recipes to test with, creates the {@link CoffeeMaker} 
@@ -136,5 +138,14 @@ public class CoffeeMakerTest {
 		assertTrue(true);
 	}
 
-	
+	@Test
+	public void testMakeCoffee2() {
+		when(recipeBookStub.getRecipes()).thenReturn(stubRecipies);
+		coffeeMaker.addRecipe(stubRecipies[0]);
+		assertEquals(25, coffeeMaker.makeCoffee(0, 75));
+	}
+
+
+
 }
+
