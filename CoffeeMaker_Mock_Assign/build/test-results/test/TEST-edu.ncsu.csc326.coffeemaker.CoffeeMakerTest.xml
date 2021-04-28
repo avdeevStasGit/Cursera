@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" tests="21" skipped="0" failures="0" errors="0" timestamp="2021-04-27T10:09:23" hostname="idea-PC" time="1.975">
+  <properties/>
+  <testcase name="testAddInventoryWithOutOfBound" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="1.663"/>
+  <testcase name="testCheckInventory1" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.001"/>
+  <testcase name="testDummy" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.047"/>
+  <testcase name="testMakeCoffee" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.004"/>
+  <testcase name="testAddInventoryWithWrongVal" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.02"/>
+  <testcase name="testAddInventoryWithStringVal" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.005"/>
+  <testcase name="testAddInventoryWithValCheckMilk" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.001"/>
+  <testcase name="testAddInventoryWithValCheckChoco" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.021"/>
+  <testcase name="testAddInventoryWithValCheckCoffe" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.031"/>
+  <testcase name="testAddInventoryWithValCheckSugar" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.011"/>
+  <testcase name="testDummy2" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.002"/>
+  <testcase name="testMakeCoffee2" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.018"/>
+  <testcase name="testMakeCoffee3" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.007"/>
+  <testcase name="testMakeCoffee4" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.009"/>
+  <testcase name="testAddInventoryWithStringVal1" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.004"/>
+  <testcase name="testAddInventoryWithStringVal2" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.009"/>
+  <testcase name="testAddInventoryWithStringVal3" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.001"/>
+  <testcase name="testAddInventoryWithStringVal4" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.001"/>
+  <testcase name="testAddInventoryWithStringVal5" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.0"/>
+  <testcase name="testAddInventoryWithStringVal6" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.001"/>
+  <testcase name="testAddInventoryWithStringVal7" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
