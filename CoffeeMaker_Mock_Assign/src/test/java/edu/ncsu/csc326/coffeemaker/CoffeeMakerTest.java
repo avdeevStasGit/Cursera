@@ -47,7 +47,7 @@ public class CoffeeMakerTest {
 	private Recipe recipe3;
 	private Recipe recipe4;
 	private Recipe recipe5;
-    private Inventory inventory;
+    private Inventory testInventory;
 	private Recipe [] stubRecipies; 
 	
 	/**
@@ -75,7 +75,7 @@ public class CoffeeMakerTest {
 	public void setUp() throws RecipeException {
 		
 		recipeBookStub = mock(RecipeBook.class);
-		coffeeMaker = new CoffeeMaker(recipeBookStub, new Inventory());
+
 		
 		//Set up for recipe1
 		recipe1 = new Recipe();
@@ -123,19 +123,28 @@ public class CoffeeMakerTest {
 		recipe5.setPrice("100");
 
 		stubRecipies = new Recipe [] {recipe1, recipe2, recipe3};
+
+		testInventory = new Inventory();
+		testInventory.setCoffee(0);
+		testInventory.setChocolate(0);
+		testInventory.setMilk(0);
+		testInventory.setSugar(0);
+
 	}
 	
 	@Test
-	public void test_Make_Coffee1() {
+	public void test_Make_Coffee0() {
 		coffeeMaker = new CoffeeMaker(recipeBookStub, new Inventory());
 		assertTrue(true);
 	}
 
-	//Пользователь выбирает напиток, который желает приобрести.
+	//Основной поток: пользователь выбирает напиток, который желает приобрести.
 	// Пользователь будет вносить деньги для оплаты напитка.
     @Test
     public void test_Make_Coffee() {
-        // Определяем поведение
+		coffeeMaker = new CoffeeMaker(recipeBookStub, new Inventory());
+
+		// Определяем поведение
         when(recipeBookStub.getRecipes()).thenReturn(stubRecipies);
 
         // Выбираем рецепт
@@ -147,28 +156,41 @@ public class CoffeeMakerTest {
     }
 
 	//Кофеварка проверит, достаточно ли ингредиентов в инвентаре для приготовления выбранного напитка.
-	// Проверка при покупке с пустым инвентарем. Кофеварка должна вернуть всю сумму - 50.
+	//Создаем пустой инвентарь(testInventory)
 	@Test
-	public void test_Make_Coffee4() throws InventoryException {
+	public void test_Empty_Inventory_Make_Coffee() throws InventoryException {
+		coffeeMaker = new CoffeeMaker(recipeBookStub, testInventory);
+
 		// Определяем поведение
 		when(recipeBookStub.getRecipes()).thenReturn(stubRecipies);
 
 		// Выбираем рецепт
 		coffeeMaker.addRecipe(recipe1);
-		// Подготовка
-		inventory.setCoffee(0);
-		inventory.setChocolate(0);
-		inventory.setMilk(0);
-		inventory.setSugar(0);
 
-
-
+		// Проверка при покупке с пустым инвентарем. Кофеварка должна вернуть всю сумму - 50.
 		assertEquals(50, coffeeMaker.makeCoffee(0, 50));
 	}
 
-    // Вернуть сдачу
+	// Внесение денег со сдачей
 	@Test
-	public void test_Make_Сoffee_Surrender() {
+	public void test_With_Delivery_Make_Сoffee() {
+		coffeeMaker = new CoffeeMaker(recipeBookStub, new Inventory());
+		// Определяем поведение
+		when(recipeBookStub.getRecipes()).thenReturn(stubRecipies);
+
+		// Выбираем рецепт
+		coffeeMaker.addRecipe(stubRecipies[0]);
+
+		// Проверяем. Сдача 25
+		assertEquals(25, coffeeMaker.makeCoffee(0, 75));
+
+	}
+
+    // Если пользователь вводит недостаточно денег для покупки, деньги будут возвращены
+	@Test
+	public void test_Surrender_Make_Сoffee() {
+		coffeeMaker = new CoffeeMaker(recipeBookStub, new Inventory());
+
 		// Определяем поведение
 		when(recipeBookStub.getRecipes()).thenReturn(stubRecipies);
 
@@ -176,7 +198,7 @@ public class CoffeeMakerTest {
 		coffeeMaker.addRecipe(stubRecipies[0]);
 
 		// Проверяем
-		assertEquals(25, coffeeMaker.makeCoffee(0, 75));
+		assertEquals(10, coffeeMaker.makeCoffee(0, 10));
 
 	}
 }
