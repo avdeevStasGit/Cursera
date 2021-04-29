@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-04-29T11:25:14" hostname="idea-PC" time="3.566">
+<testsuite name="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-04-29T12:08:34" hostname="idea-PC" time="1.929">
   <properties/>
-  <testcase name="test_Surrender_Make_Coffee" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="3.539"/>
-  <testcase name="test_Make_Coffee0" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.001"/>
-  <testcase name="test_Not_Matching_Number_Make_Coffee" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.004"/>
-  <testcase name="test_With_Delivery_Make_Coffee" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.006"/>
-  <testcase name="test_Make_Coffee" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.004"/>
-  <testcase name="test_Empty_Inventory_Make_Coffee" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.002"/>
+  <testcase name="test_Call2_Make_Coffee" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="1.892"/>
+  <testcase name="test_Call_Make_Coffee" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.026"/>
+  <testcase name="test_Surrender_Make_Coffee" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.001"/>
+  <testcase name="test_Make_Coffee0" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.0"/>
+  <testcase name="test_Not_Matching_Number_Make_Coffee" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.001"/>
+  <testcase name="test_With_Delivery_Make_Coffee" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.001"/>
+  <testcase name="test_Make_Coffee" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.002"/>
+  <testcase name="test_Empty_Inventory_Make_Coffee" classname="edu.ncsu.csc326.coffeemaker.CoffeeMakerTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

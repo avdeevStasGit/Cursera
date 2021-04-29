@@ -210,5 +210,28 @@ public class CoffeeMakerTest {
 		// Проверяем
 		assertEquals(70, coffeeMaker.makeCoffee(3, 70));
 	}
+
+	@Test
+	public void test_Call_Make_Coffee() {
+		when(recipeBookStub.addRecipe(stubRecipies[0])).thenReturn(true);
+		when(recipeBookStub.addRecipe(stubRecipies[1])).thenReturn(true);
+		when(recipeBookStub.addRecipe(stubRecipies[1])).thenReturn(false);
+		when(recipeBookStub.addRecipe(recipe4)).thenReturn(false);
+		when(recipeBookStub.addRecipe(stubRecipies[2])).thenReturn(true);
+	}
+
+	@Test
+	public void test_Call2_Make_Coffee() {
+		when(recipeBookStub.getRecipes()).thenReturn(stubRecipies);
+		coffeeMaker.addRecipe(stubRecipies[0]);
+		assertEquals(stubRecipies[0].getName(), "Coffee");
+		assertEquals(stubRecipies[0].getAmtChocolate(), 0);
+		assertEquals(stubRecipies[0].getAmtCoffee(), 3);
+		assertEquals(stubRecipies[0].getAmtMilk(), 1);
+		assertEquals(stubRecipies[0].getAmtSugar(), 1);
+		assertEquals(stubRecipies[0].getPrice(), 50);
+	}
+
+
 }
 
