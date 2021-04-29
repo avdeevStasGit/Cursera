@@ -73,8 +73,8 @@ public class CoffeeMakerTest {
 	 */
 	@Before
 	public void setUp() throws RecipeException {
-		
 		recipeBookStub = mock(RecipeBook.class);
+		coffeeMaker = new CoffeeMaker(recipeBookStub, new Inventory());
 
 		
 		//Set up for recipe1
@@ -124,11 +124,7 @@ public class CoffeeMakerTest {
 
 		stubRecipies = new Recipe [] {recipe1, recipe2, recipe3};
 
-		testInventory = new Inventory();
-		testInventory.setCoffee(0);
-		testInventory.setChocolate(0);
-		testInventory.setMilk(0);
-		testInventory.setSugar(0);
+
 
 	}
 	
@@ -142,8 +138,6 @@ public class CoffeeMakerTest {
 	// Пользователь будет вносить деньги для оплаты напитка.
     @Test
     public void test_Make_Coffee() {
-		coffeeMaker = new CoffeeMaker(recipeBookStub, new Inventory());
-
 		// Определяем поведение
         when(recipeBookStub.getRecipes()).thenReturn(stubRecipies);
 
@@ -159,6 +153,12 @@ public class CoffeeMakerTest {
 	//Создаем пустой инвентарь(testInventory)
 	@Test
 	public void test_Empty_Inventory_Make_Coffee() throws InventoryException {
+		testInventory = new Inventory();
+		testInventory.setCoffee(0);
+		testInventory.setChocolate(0);
+		testInventory.setMilk(0);
+		testInventory.setSugar(0);
+
 		coffeeMaker = new CoffeeMaker(recipeBookStub, testInventory);
 
 		// Определяем поведение
@@ -173,8 +173,7 @@ public class CoffeeMakerTest {
 
 	// Внесение денег со сдачей
 	@Test
-	public void test_With_Delivery_Make_Сoffee() {
-		coffeeMaker = new CoffeeMaker(recipeBookStub, new Inventory());
+	public void test_With_Delivery_Make_Coffee() {
 		// Определяем поведение
 		when(recipeBookStub.getRecipes()).thenReturn(stubRecipies);
 
@@ -183,14 +182,11 @@ public class CoffeeMakerTest {
 
 		// Проверяем. Сдача 25
 		assertEquals(25, coffeeMaker.makeCoffee(0, 75));
-
 	}
 
     // Если пользователь вводит недостаточно денег для покупки, деньги будут возвращены
 	@Test
-	public void test_Surrender_Make_Сoffee() {
-		coffeeMaker = new CoffeeMaker(recipeBookStub, new Inventory());
-
+	public void test_Surrender_Make_Coffee() {
 		// Определяем поведение
 		when(recipeBookStub.getRecipes()).thenReturn(stubRecipies);
 
@@ -200,6 +196,19 @@ public class CoffeeMakerTest {
 		// Проверяем
 		assertEquals(10, coffeeMaker.makeCoffee(0, 10));
 
+	}
+
+	// Если пользователь выберет номер, не соответствующий рецепту, деньги пользователя будут возвращены
+	@Test(expected = ArrayIndexOutOfBoundsException.class)
+	public void test_Not_Matching_Number_Make_Coffee() throws ArrayIndexOutOfBoundsException {
+		// Определяем поведение
+		when(recipeBookStub.getRecipes()).thenReturn(stubRecipies);
+
+		// Выбираем рецепт
+		coffeeMaker.addRecipe(stubRecipies[3]);
+
+		// Проверяем
+		assertEquals(70, coffeeMaker.makeCoffee(3, 70));
 	}
 }
 
