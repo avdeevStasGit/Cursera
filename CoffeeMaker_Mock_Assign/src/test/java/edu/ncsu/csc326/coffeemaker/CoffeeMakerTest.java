@@ -47,7 +47,7 @@ public class CoffeeMakerTest {
 	private Recipe recipe3;
 	private Recipe recipe4;
 	private Recipe recipe5;
-	
+    private Inventory inventory;
 	private Recipe [] stubRecipies; 
 	
 	/**
@@ -125,27 +125,59 @@ public class CoffeeMakerTest {
 		stubRecipies = new Recipe [] {recipe1, recipe2, recipe3};
 	}
 	
-	
-	//-----------------------------------------------------------------------
-	//	Test Methods
-	//-----------------------------------------------------------------------
-	
-	// put your tests here!
-	
 	@Test
-	public void testMakeCoffee() {
+	public void test_Make_Coffee1() {
 		coffeeMaker = new CoffeeMaker(recipeBookStub, new Inventory());
 		assertTrue(true);
 	}
 
+	//Пользователь выбирает напиток, который желает приобрести.
+	// Пользователь будет вносить деньги для оплаты напитка.
+    @Test
+    public void test_Make_Coffee() {
+        // Определяем поведение
+        when(recipeBookStub.getRecipes()).thenReturn(stubRecipies);
+
+        // Выбираем рецепт
+        coffeeMaker.addRecipe(stubRecipies[0]);
+
+        // Проверяем(вносим деньги для оплаты напитка)
+        assertEquals(0, coffeeMaker.makeCoffee(0, 50));
+
+    }
+
+	//Кофеварка проверит, достаточно ли ингредиентов в инвентаре для приготовления выбранного напитка.
+	// Проверка при покупке с пустым инвентарем. Кофеварка должна вернуть всю сумму - 50.
 	@Test
-	public void testMakeCoffee2() {
+	public void test_Make_Coffee4() throws InventoryException {
+		// Определяем поведение
 		when(recipeBookStub.getRecipes()).thenReturn(stubRecipies);
-		coffeeMaker.addRecipe(stubRecipies[0]);
-		assertEquals(25, coffeeMaker.makeCoffee(0, 75));
+
+		// Выбираем рецепт
+		coffeeMaker.addRecipe(recipe1);
+		// Подготовка
+		inventory.setCoffee(0);
+		inventory.setChocolate(0);
+		inventory.setMilk(0);
+		inventory.setSugar(0);
+
+
+
+		assertEquals(50, coffeeMaker.makeCoffee(0, 50));
 	}
 
+    // Вернуть сдачу
+	@Test
+	public void test_Make_Сoffee_Surrender() {
+		// Определяем поведение
+		when(recipeBookStub.getRecipes()).thenReturn(stubRecipies);
 
+		// Выбираем рецепт
+		coffeeMaker.addRecipe(stubRecipies[0]);
 
+		// Проверяем
+		assertEquals(25, coffeeMaker.makeCoffee(0, 75));
+
+	}
 }
 
