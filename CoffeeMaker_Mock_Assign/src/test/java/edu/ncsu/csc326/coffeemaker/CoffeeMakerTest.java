@@ -197,19 +197,16 @@ public class CoffeeMakerTest {
 
 		// Проверяем
 		assertEquals(10, coffeeMaker.makeCoffee(0, 10));
-
 	}
 
 	// Если пользователь выберет номер, не соответствующий рецепту, деньги пользователя будут возвращены
-	@Test(expected = ArrayIndexOutOfBoundsException.class)
-	public void test_Not_Matching_Number_Make_Coffee() throws ArrayIndexOutOfBoundsException {
+	@Test
+	public void test_Not_Matching_Number_Make_Coffee() {
 		// Определяем поведение
 		when(recipeBookStub.getRecipes()).thenReturn(stubRecipies);
 
 		// Выбираем рецепт
-
 		coffeeMaker.addRecipe(stubRecipies[3]);
-        assertTrue(true);
 
 		// Проверяем
 		assertEquals(70, coffeeMaker.makeCoffee(3, 70));
@@ -226,6 +223,20 @@ public class CoffeeMakerTest {
 		assertEquals(stubRecipies[0].getAmtSugar(), 1);
 		assertEquals(stubRecipies[0].getPrice(), 50);
 	}
+
+	@Test
+    public void test_igridient() {
+        when(recipeBookStub.getRecipes()).thenReturn(stubRecipies);
+	    coffeeMaker.makeCoffee(0,50);
+        assertEquals(12,testInventory.getCoffee());
+    }
+
+    @Test
+    public void test_igridient2() {
+        when(recipeBookStub.getRecipes()).thenReturn(stubRecipies);
+        coffeeMaker.makeCoffee(0,50);
+        assertEquals(14,testInventory.getSugar());
+    }
 
 }
 
