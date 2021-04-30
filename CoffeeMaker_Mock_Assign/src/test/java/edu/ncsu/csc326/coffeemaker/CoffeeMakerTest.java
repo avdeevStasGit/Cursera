@@ -22,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -74,7 +75,8 @@ public class CoffeeMakerTest {
 	@Before
 	public void setUp() throws RecipeException {
 		recipeBookStub = mock(RecipeBook.class);
-		coffeeMaker = new CoffeeMaker(recipeBookStub, new Inventory());
+		testInventory = new Inventory();
+		coffeeMaker = new CoffeeMaker(recipeBookStub, testInventory);
 
 		
 		//Set up for recipe1
@@ -205,23 +207,16 @@ public class CoffeeMakerTest {
 		when(recipeBookStub.getRecipes()).thenReturn(stubRecipies);
 
 		// Выбираем рецепт
+
 		coffeeMaker.addRecipe(stubRecipies[3]);
+        assertTrue(true);
 
 		// Проверяем
 		assertEquals(70, coffeeMaker.makeCoffee(3, 70));
 	}
 
 	@Test
-	public void test_Call_Make_Coffee() {
-		when(recipeBookStub.addRecipe(stubRecipies[0])).thenReturn(true);
-		when(recipeBookStub.addRecipe(stubRecipies[1])).thenReturn(true);
-		when(recipeBookStub.addRecipe(stubRecipies[1])).thenReturn(false);
-		when(recipeBookStub.addRecipe(recipe4)).thenReturn(false);
-		when(recipeBookStub.addRecipe(stubRecipies[2])).thenReturn(true);
-	}
-
-	@Test
-	public void test_Call2_Make_Coffee() {
+	public void test_Call3_Make_Coffee() {
 		when(recipeBookStub.getRecipes()).thenReturn(stubRecipies);
 		coffeeMaker.addRecipe(stubRecipies[0]);
 		assertEquals(stubRecipies[0].getName(), "Coffee");
@@ -231,7 +226,6 @@ public class CoffeeMakerTest {
 		assertEquals(stubRecipies[0].getAmtSugar(), 1);
 		assertEquals(stubRecipies[0].getPrice(), 50);
 	}
-
 
 }
 
