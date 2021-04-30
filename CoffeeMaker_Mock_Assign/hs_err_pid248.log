@@ -1,0 +1,221 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 703136 bytes for Chunk::new
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (allocation.cpp:389), pid=248, tid=0x00000000000033e4
+#
+# JRE version: OpenJDK Runtime Environment (8.0_282-b08) (build 1.8.0_282-b08)
+# Java VM: OpenJDK 64-Bit Server VM (25.282-b08 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x000001f3265f0000):  JavaThread "C2 CompilerThread0" daemon [_thread_in_native, id=13284, stack(0x0000003fb5b00000,0x0000003fb5c00000)]
+
+Stack: [0x0000003fb5b00000,0x0000003fb5c00000]
+[error occurred during error reporting (printing stack bounds), id 0xc0000005]
+
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+
+
+Current CompileTask:
+C2:   1049  578       4       org.jacoco.agent.rt.internal_14f7ee5.asm.ClassReader::readCode (3343 bytes)
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x000001f32760e000 JavaThread "Service Thread" daemon [_thread_blocked, id=4896, stack(0x0000003fb5e00000,0x0000003fb5f00000)]
+  0x000001f3275dc000 JavaThread "C1 CompilerThread2" daemon [_thread_in_native, id=9580, stack(0x0000003fb5d00000,0x0000003fb5e00000)]
+  0x000001f3265f0800 JavaThread "C2 CompilerThread1" daemon [_thread_in_native, id=5428, stack(0x0000003fb5c00000,0x0000003fb5d00000)]
+=>0x000001f3265f0000 JavaThread "C2 CompilerThread0" daemon [_thread_in_native, id=13284, stack(0x0000003fb5b00000,0x0000003fb5c00000)]
+  0x000001f326587000 JavaThread "Attach Listener" daemon [_thread_blocked, id=12436, stack(0x0000003fb5a00000,0x0000003fb5b00000)]
+  0x000001f32657e000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=12912, stack(0x0000003fb5900000,0x0000003fb5a00000)]
+  0x000001f325dac800 JavaThread "Finalizer" daemon [_thread_blocked, id=8648, stack(0x0000003fb5800000,0x0000003fb5900000)]
+  0x000001f3264d6000 JavaThread "Reference Handler" daemon [_thread_blocked, id=10944, stack(0x0000003fb5700000,0x0000003fb5800000)]
+  0x000001f310300000 JavaThread "main" [_thread_in_vm, id=3948, stack(0x0000003fb5100000,0x0000003fb5200000)]
+
+Other Threads:
+  0x000001f3264b4800 VMThread [stack: 0x0000003fb5600000,0x0000003fb5700000] [id=11552]
+  0x000001f32660e000 WatcherThread [stack: 0x0000003fb5f00000,0x0000003fb6000000] [id=9576]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+heap address: 0x0000000088e00000, size: 1906 MB, Compressed Oops mode: 32-bit
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 3
+Compressed class space size: 1073741824 Address: 0x0000000100000000
+
+Heap:
+ PSYoungGen      total 35840K, used 20436K [0x00000000d8500000, 0x00000000dad00000, 0x0000000100000000)
+  eden space 30720K, 66% used [0x00000000d8500000,0x00000000d98f5138,0x00000000da300000)
+  from space 5120K, 0% used [0x00000000da800000,0x00000000da800000,0x00000000dad00000)
+  to   space 5120K, 0% used [0x00000000da300000,0x00000000da300000,0x00000000da800000)
+ ParOldGen       total 81920K, used 0K [0x0000000088e00000, 0x000000008de00000, 0x00000000d8500000)
+  object space 81920K, 0% used [0x0000000088e00000,0x0000000088e00000,0x000000008de00000)
+ Metaspace       used 6461K, capacity 6622K, committed 6784K, reserved 1056768K
+  class space    used 730K, capacity 775K, committed 896K, reserved 1048576K
+
+Card table byte_map: [0x000001f320f20000,0x000001f3212e0000] byte_map_base: 0x000001f320ad9000
+
+Marking Bits: (ParMarkBitMap*) 0x0000000070d60890
+ Begin Bits: [0x000001f321560000, 0x000001f323328000)
+ End Bits:   [0x000001f323328000, 0x000001f3250f0000)
+
+Polling page: 0x000001f310220000
+
+CodeCache: size=245760Kb used=3035Kb max_used=3035Kb free=242724Kb
+ bounds [0x000001f311b60000, 0x000001f311e60000, 0x000001f320b60000]
+ total_blobs=1002 nmethods=715 adapters=201
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 1.022 Thread 0x000001f3275dc000 nmethod 713 0x000001f311e53510 code [0x000001f311e536a0, 0x000001f311e53a10]
+Event: 1.022 Thread 0x000001f3275dc000  711       3       jdk.internal.org.objectweb.asm.Frame::push (110 bytes)
+Event: 1.023 Thread 0x000001f3275dc000 nmethod 711 0x000001f311e53f10 code [0x000001f311e540a0, 0x000001f311e545b0]
+Event: 1.023 Thread 0x000001f3275dc000  716       3       java.util.Arrays$ArrayList::size (6 bytes)
+Event: 1.023 Thread 0x000001f3275dc000 nmethod 716 0x000001f311e54790 code [0x000001f311e548e0, 0x000001f311e54a38]
+Event: 1.023 Thread 0x000001f3275dc000  718   !   3       java.lang.invoke.MemberName::getMethodType (208 bytes)
+Event: 1.026 Thread 0x000001f3275dc000 nmethod 718 0x000001f311e54f50 code [0x000001f311e551e0, 0x000001f311e569a0]
+Event: 1.026 Thread 0x000001f3275dc000  717       3       java.util.AbstractList$Itr::hasNext (20 bytes)
+Event: 1.026 Thread 0x000001f3275dc000 nmethod 717 0x000001f311e57210 code [0x000001f311e57380, 0x000001f311e57610]
+Event: 1.026 Thread 0x000001f3275dc000  719       3       jdk.internal.org.objectweb.asm.Item::isEqualTo (354 bytes)
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (1 events):
+Event: 0.731 Thread 0x000001f310300000 Uncommon trap: reason=unstable_if action=reinterpret pc=0x000001f311d7f3d0 method=org.jacoco.agent.rt.internal_14f7ee5.asm.MethodVisitor.visitLineNumber(ILorg/jacoco/agent/rt/internal_14f7ee5/asm/Label;)V @ 4
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (10 events):
+Event: 0.528 Thread 0x000001f310300000 Exception <a 'java/lang/NoClassDefFoundError': org/apache/commons/lang/StringUtils> (0x00000000d8b12878) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\share\vm\oops\constantPool.cpp, line 606]
+Event: 0.693 Thread 0x000001f310300000 Exception <a 'java/lang/ArrayIndexOutOfBoundsException': 100> (0x00000000d8f40d88) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\share\vm\interpreter\interpreterRuntime.cpp, line 371]
+Event: 0.696 Thread 0x000001f310300000 Exception <a 'java/lang/ArrayIndexOutOfBoundsException': 18> (0x00000000d8f4e330) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\share\vm\interpreter\interpreterRuntime.cpp, line 371]
+Event: 0.697 Thread 0x000001f310300000 Exception <a 'java/lang/ArrayIndexOutOfBoundsException': 40> (0x00000000d8f4f908) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\share\vm\interpreter\interpreterRuntime.cpp, line 371]
+Event: 0.719 Thread 0x000001f310300000 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000d900f478) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\share\vm\runtime\sharedRuntime.cpp, line 609]
+Event: 0.719 Thread 0x000001f310300000 Exception <a 'java/lang/ArrayIndexOutOfBoundsException'> (0x00000000d9010150) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\share\vm\runtime\sharedRuntime.cpp, line 609]
+Event: 0.873 Thread 0x000001f310300000 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d94763d8) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\share\vm\prims\jvm.cpp, line 1522]
+Event: 0.873 Thread 0x000001f310300000 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d94765e8) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\share\vm\prims\jvm.cpp, line 1522]
+Event: 0.875 Thread 0x000001f310300000 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d947c380) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\share\vm\prims\jvm.cpp, line 1522]
+Event: 0.875 Thread 0x000001f310300000 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d947c590) thrown at [C:\wsjdk\Corretto8Src\installers\windows\zip\corretto-build\buildRoot\src\hotspot\src\share\vm\prims\jvm.cpp, line 1522]
+
+Events (10 events):
+Event: 1.006 loading class java/lang/invoke/MethodHandleImpl$AsVarargsCollector
+Event: 1.006 loading class java/lang/invoke/DelegatingMethodHandle
+Event: 1.006 loading class java/lang/invoke/DelegatingMethodHandle done
+Event: 1.006 loading class java/lang/invoke/MethodHandleImpl$AsVarargsCollector done
+Event: 1.007 loading class java/lang/invoke/WrongMethodTypeException
+Event: 1.007 loading class java/lang/invoke/WrongMethodTypeException done
+Event: 1.009 loading class java/lang/invoke/MethodHandleImpl$Lazy
+Event: 1.010 loading class java/lang/invoke/MethodHandleImpl$Lazy done
+Event: 1.010 loading class java/lang/invoke/MethodHandleImpl$IntrinsicMethodHandle
+Event: 1.010 loading class java/lang/invoke/MethodHandleImpl$IntrinsicMethodHandle done
+
+
+Dynamic libraries:
+0x00007ff61f1d0000 - 0x00007ff61f20a000 	C:\Users\Никита\.jdks\corretto-1.8.0_282\bin\java.exe
+0x00007ffb363e0000 - 0x00007ffb365d0000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffb35230000 - 0x00007ffb352e2000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ffb33fd0000 - 0x00007ffb34275000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ffb358c0000 - 0x00007ffb35963000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ffb34500000 - 0x00007ffb3459e000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ffb35430000 - 0x00007ffb354c7000 	C:\WINDOWS\System32\sechost.dll
+0x00007ffb34ef0000 - 0x00007ffb3500f000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ffb345b0000 - 0x00007ffb34744000 	C:\WINDOWS\System32\USER32.dll
+0x00007ffb33dd0000 - 0x00007ffb33df1000 	C:\WINDOWS\System32\win32u.dll
+0x00007ffb354d0000 - 0x00007ffb354f6000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ffb33e00000 - 0x00007ffb33f98000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ffb343f0000 - 0x00007ffb3448e000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ffb33360000 - 0x00007ffb3345a000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ffb26dc0000 - 0x00007ffb27044000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.18362.1316_none_9e7a364fe461dbd7\COMCTL32.dll
+0x00007ffb36060000 - 0x00007ffb36397000 	C:\WINDOWS\System32\combase.dll
+0x00007ffb33460000 - 0x00007ffb334e1000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007ffb34c40000 - 0x00007ffb34c6e000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007ffb10d20000 - 0x00007ffb10e0f000 	C:\Users\Никита\.jdks\corretto-1.8.0_282\jre\bin\msvcr120.dll
+0x00007ffb1db90000 - 0x00007ffb1dc36000 	C:\Users\Никита\.jdks\corretto-1.8.0_282\jre\bin\msvcp120.dll
+0x0000000070570000 - 0x0000000070ddf000 	C:\Users\Никита\.jdks\corretto-1.8.0_282\jre\bin\server\jvm.dll
+0x00007ffb35010000 - 0x00007ffb35018000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007ffb2fe60000 - 0x00007ffb2fe84000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffb2cd60000 - 0x00007ffb2cd6a000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ffb25610000 - 0x00007ffb25619000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ffb34490000 - 0x00007ffb344ff000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ffb2fe30000 - 0x00007ffb2fe5d000 	C:\WINDOWS\SYSTEM32\winmmbase.dll
+0x00007ffb33d80000 - 0x00007ffb33dca000 	C:\WINDOWS\System32\cfgmgr32.dll
+0x00007ffb2fcb0000 - 0x00007ffb2fcbf000 	C:\Users\Никита\.jdks\corretto-1.8.0_282\jre\bin\verify.dll
+0x00007ffb22ca0000 - 0x00007ffb22cc9000 	C:\Users\Никита\.jdks\corretto-1.8.0_282\jre\bin\java.dll
+0x00007ffb205e0000 - 0x00007ffb2060a000 	C:\Users\Никита\.jdks\corretto-1.8.0_282\jre\bin\instrument.dll
+0x00007ffb28770000 - 0x00007ffb28786000 	C:\Users\Никита\.jdks\corretto-1.8.0_282\jre\bin\zip.dll
+0x00007ffb35970000 - 0x00007ffb36058000 	C:\WINDOWS\System32\SHELL32.dll
+0x00007ffb35020000 - 0x00007ffb350c7000 	C:\WINDOWS\System32\shcore.dll
+0x00007ffb334f0000 - 0x00007ffb33c6b000 	C:\WINDOWS\System32\windows.storage.dll
+0x00007ffb332c0000 - 0x00007ffb332e3000 	C:\WINDOWS\System32\profapi.dll
+0x00007ffb332f0000 - 0x00007ffb3333a000 	C:\WINDOWS\System32\powrprof.dll
+0x00007ffb33290000 - 0x00007ffb332a0000 	C:\WINDOWS\System32\UMPDC.dll
+0x00007ffb34d20000 - 0x00007ffb34d72000 	C:\WINDOWS\System32\shlwapi.dll
+0x00007ffb33340000 - 0x00007ffb33351000 	C:\WINDOWS\System32\kernel.appcore.dll
+0x00007ffb343d0000 - 0x00007ffb343e7000 	C:\WINDOWS\System32\cryptsp.dll
+0x00007ffb21170000 - 0x00007ffb2118a000 	C:\Users\Никита\.jdks\corretto-1.8.0_282\jre\bin\net.dll
+0x00007ffb32ad0000 - 0x00007ffb32b37000 	C:\WINDOWS\system32\mswsock.dll
+0x00007ffb13f90000 - 0x00007ffb13fa6000 	C:\WINDOWS\system32\napinsp.dll
+0x00007ffb13fb0000 - 0x00007ffb13fca000 	C:\WINDOWS\system32\pnrpnsp.dll
+0x00007ffb32820000 - 0x00007ffb328eb000 	C:\WINDOWS\SYSTEM32\DNSAPI.dll
+0x00007ffb345a0000 - 0x00007ffb345a8000 	C:\WINDOWS\System32\NSI.dll
+0x00007ffb327e0000 - 0x00007ffb3281a000 	C:\WINDOWS\SYSTEM32\IPHLPAPI.DLL
+0x00007ffb217d0000 - 0x00007ffb217de000 	C:\WINDOWS\System32\winrnr.dll
+0x00007ffb2fc80000 - 0x00007ffb2fc9c000 	C:\WINDOWS\system32\NLAapi.dll
+0x00007ffb198f0000 - 0x00007ffb19905000 	C:\WINDOWS\system32\wshbth.dll
+0x00007ffb27740000 - 0x00007ffb2774a000 	C:\Windows\System32\rasadhlp.dll
+0x00007ffb2b9f0000 - 0x00007ffb2ba67000 	C:\WINDOWS\System32\fwpuclnt.dll
+0x00007ffb33fa0000 - 0x00007ffb33fc6000 	C:\WINDOWS\System32\bcrypt.dll
+0x00007ffb20720000 - 0x00007ffb20732000 	C:\Users\Никита\.jdks\corretto-1.8.0_282\jre\bin\nio.dll
+
+VM Arguments:
+jvm_args: -Djava.security.manager=worker.org.gradle.process.internal.worker.child.BootstrapSecurityManager -Dorg.gradle.native=false -javaagent:build/tmp/expandedArchives/org.jacoco.agent-0.7.6.201602180812.jar_c6e4c8f58c148113c152dc0b1072a756/jacocoagent.jar=destfile=build/jacoco/test.exec,append=true,inclnolocationclasses=false,dumponexit=true,output=file,jmx=false -Dfile.encoding=windows-1251 -Duser.country=RU -Duser.language=ru -Duser.variant -ea 
+java_command: worker.org.gradle.process.internal.worker.GradleWorkerMain 'Gradle Test Executor 3'
+java_class_path (initial): C:\Users\Никита\.gradle\caches\4.3.1\workerMain\gradle-worker.jar;build/tmp/expandedArchives/org.jacoco.agent-0.7.6.201602180812.jar_c6e4c8f58c148113c152dc0b1072a756/jacocoagent.jar
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk-15.0.1
+PATH=C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\AMD APP\bin\x86_64;C:\Program Files (x86)\AMD APP\bin\x86;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files (x86)\Common Files\Adobe\AGL;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Java\jdk-15.0.1\bin;C:\Program Files\Git\cmd;C:\Users\Никита\AppData\Local\Microsoft\WindowsApps;;C:\Program Files\JetBrains\PyCharm 2020.2.3\bin;;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3\bin;;C:\Program Files\JetBrains\PyCharm Community Edition 2020.3.2\bin;
+USERNAME=Никита
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=AMD64 Family 21 Model 16 Stepping 1, AuthenticAMD
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10.0 , 64 bit Build 18362 (10.0.18362.1316)
+
+CPU:total 4 (initial active 4) (4 cores per cpu, 1 threads per core) family 21 model 16 stepping 1, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, aes, clmul, mmxext, 3dnowpref, lzcnt, sse4a, tsc, tscinvbit, tscinv, bmi1
+
+Memory: 4k page, physical 7805192k(1012196k free), swap 7805192k(4080k free)
+
+vm_info: OpenJDK 64-Bit Server VM (25.282-b08) for windows-amd64 JRE (1.8.0_282-b08), built on Jan 14 2021 22:12:08 by "Administrator" with MS VC++ 12.0 (VS2013)
+
+time: Thu Apr 29 16:10:44 2021
+timezone: RTZ 2 (ceia)
+elapsed time: 1.102129 seconds (0d 0h 0m 1s)
+
