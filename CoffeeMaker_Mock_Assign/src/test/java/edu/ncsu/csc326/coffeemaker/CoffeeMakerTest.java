@@ -24,6 +24,7 @@ import static org.mockito.Mockito.*;
 import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import edu.ncsu.csc326.coffeemaker.exceptions.RecipeException;
@@ -204,9 +205,6 @@ public class CoffeeMakerTest {
 	public void test_Not_Matching_Number_Make_Coffee() {
 		// Определяем поведение
 		when(recipeBookStub.getRecipes()).thenReturn(stubRecipies);
-
-		// Выбираем рецепт
-		coffeeMaker.addRecipe(stubRecipies[3]);
 
 		// Проверяем
 		assertEquals(70, coffeeMaker.makeCoffee(3, 70));
