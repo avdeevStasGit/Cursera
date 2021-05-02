@@ -15,6 +15,8 @@ Idea, Gradle, Java, Junit, Jacoco, Mockito, Cucumber, Selenium
 
 ![Jacoco](https://user-images.githubusercontent.com/66553252/116185297-fe7c7880-a729-11eb-9816-242c83d7ba76.png)
 
+![Blog-12-Advantages-of-Cucumber-Testing-Software-460x251](https://user-images.githubusercontent.com/66553252/116811382-b1493e00-ab51-11eb-8579-ca894349554b.jpg)
+
 ![Untitled-9](https://user-images.githubusercontent.com/66553252/116207486-9c7f3b80-a748-11eb-9d4c-e5ac5bf50894.png)
 
 
