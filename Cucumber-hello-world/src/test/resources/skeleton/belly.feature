@@ -5,3 +5,5 @@ Feature: BellyFeature
     When I wait 2 hour
     Then my Belly should growl
 
+  Scenario2:
+
