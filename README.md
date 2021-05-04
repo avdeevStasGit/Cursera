@@ -3,7 +3,7 @@
 Курсы по специализации Software Testing and Automation.
 Projects
 
-Idea, Gradle, Java, Junit, Jacoco, Mockito, Cucumber, Selenium, Jenkins, Regex
+Idea, Gradle, Java, Junit, Jacoco, Mockito, Cucumber, Selenium, Jenkins, Regex, Postman
 
 ![hqdefault](https://user-images.githubusercontent.com/66553252/116185561-86628280-a72a-11eb-8805-73801fdf25c4.jpg)
 
@@ -20,6 +20,9 @@ Idea, Gradle, Java, Junit, Jacoco, Mockito, Cucumber, Selenium, Jenkins, Regex
 ![Untitled-9](https://user-images.githubusercontent.com/66553252/116207486-9c7f3b80-a748-11eb-9d4c-e5ac5bf50894.png)
 
 ![500px-Jenkins_logo_with_title svg](https://user-images.githubusercontent.com/66553252/116858339-e19ee400-ac06-11eb-84db-2827c8cf6b14.png)
+
+![20161014121224651](https://user-images.githubusercontent.com/66553252/117021787-51dd6080-ad00-11eb-92ae-bbb2ef6fdd33.jpg)
+
 
 
 
