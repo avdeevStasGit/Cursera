@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="skeleton.RunCukesTest" tests="0" skipped="0" failures="0" errors="0" timestamp="1970-01-01T00:00:00" hostname="idea-PC" time="0.0">
+  <properties/>
+  <system-out><![CDATA[test_posint true for: 9
+test_posint true for: 77777777
+test_int true for: -1
+test_int true for: 1435
+test_int true for: 12345.543
+test_int true for: -13.56
+test_ip_address true for: 123.34.76.109
+test_ip_address true for: 123.34.76.109
+test_ip_address true for: 105.22.33.44
+test_ip_address true for: 1.2.3.4
+
+?[33mUndefined scenarios:?[0m
+?[33mskeleton/Test.feature:3 ?[0m# Scenario: test regular expressions that should pass
+?[33mskeleton/Test.feature:24 ?[0m# Scenario: fail 1
+?[33mskeleton/Test.feature:26 ?[0m# Scenario: fail 2
+?[33mskeleton/Test.feature:28 ?[0m# Scenario: fail 3
+?[33mskeleton/Test.feature:30 ?[0m# Scenario: fail 4
+?[33mskeleton/Test.feature:32 ?[0m# Scenario: fail 5
+?[33mskeleton/Test.feature:34 ?[0m# Scenario: fail 6
+?[33mskeleton/Test.feature:36 ?[0m# Scenario: fail 7
+?[33mskeleton/Test.feature:38 ?[0m# Scenario: fail 8
+?[33mskeleton/Test.feature:40 ?[0m# Scenario: fail 9
+
+10 Scenarios (?[33m10 undefined?[0m)
+28 Steps (?[33m17 undefined?[0m, ?[32m11 passed?[0m)
+0m0,377s
+
+
+You can implement missing steps with the snippets below:
+
+@When("^test_splitter spill$")
+public void test_splitter_spill() throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@When("^test_splitter Sponge$")
+public void test_splitter_Sponge() throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@When("^test_splitter tap$")
+public void test_splitter_tap() throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@When("^test_splitter rebuild$")
+public void test_splitter_rebuild() throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@When("^test_splitter(\\d+) spill$")
+public void test_splitter_spill(int arg1) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@When("^test_splitter(\\d+) Sponge$")
+public void test_splitter_Sponge(int arg1) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@When("^test_splitter(\\d+) tap$")
+public void test_splitter_tap(int arg1) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@When("^test_splitter(\\d+) rebuild$")
+public void test_splitter_rebuild(int arg1) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@When("^test_int (\\d+)y(\\d+)$")
+public void test_int_y(int arg1, int arg2) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@When("^test_int (\\d+)k$")
+public void test_int_k(int arg1) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@When("^test_int (\\d+)\\.(\\d+)$")
+public void test_int(int arg1, int arg2) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@When("^test_float (\\d+)$")
+public void test_float(int arg1) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@When("^test_int (\\d+) and more$")
+public void test_int_and_more(int arg1) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@When("^test_float (\\d+)\\.(\\d+) and more$")
+public void test_float_and_more(int arg1, int arg2) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@When("^test_ip_address (\\d+)\\.(\\d+)\\.(\\d+)$")
+public void test_ip_address(int arg1, int arg2, int arg3) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@When("^test_ip_address four score and (\\d+)\\.(\\d+)\\.(\\d+)\\.(\\d+)$")
+public void test_ip_address_four_score_and(int arg1, int arg2, int arg3, int arg4) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+@When("^test_ip_address (\\d+)\\.(\\d+)\\.(\\d+)\\.(\\d+) and more$")
+public void test_ip_address_and_more(int arg1, int arg2, int arg3, int arg4) throws Throwable {
+    // Write code here that turns the phrase above into concrete actions
+    throw new PendingException();
+}
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
