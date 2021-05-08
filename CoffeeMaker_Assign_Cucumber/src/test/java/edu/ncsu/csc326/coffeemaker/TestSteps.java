@@ -20,12 +20,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.When;
 import edu.ncsu.csc326.coffeemaker.CoffeeMaker;
+import edu.ncsu.csc326.coffeemaker.UICmd.Command;
+import org.junit.Before;
 
-/**
- * Contains the step definitions for the cucumber tests.  This parses the 
- * Gherkin steps and translates them into meaningful test steps.
- */
 public class TestSteps {
 	
 	private Recipe recipe1;
@@ -33,27 +32,37 @@ public class TestSteps {
 	private Recipe recipe3;
 	private Recipe recipe4;
 	private Recipe recipe5;
+	private Inventory inventory;
 	private CoffeeMakerUI coffeeMakerMain; 
 	private CoffeeMaker coffeeMaker;
 	private RecipeBook recipeBook;
 
-	
+
 	private void initialize() {
+	    inventory = new Inventory();
 		recipeBook = new RecipeBook();
-		coffeeMaker = new CoffeeMaker(recipeBook, new Inventory());
+		coffeeMaker = new CoffeeMaker(recipeBook, inventory);
 		coffeeMakerMain = new CoffeeMakerUI(coffeeMaker);
 	}
-	
-    @Given("^an empty recipe book$")
-    public void an_empty_recipe_book() throws Throwable {
-        initialize();
-    }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+/*
     @Given("a default recipe book")
 	public void a_default_recipe_book() throws Throwable {
     	initialize();
-    	
+
 		//Set up for r1
 		recipe1 = new Recipe();
 		recipe1.setName("Coffee");
@@ -62,7 +71,7 @@ public class TestSteps {
 		recipe1.setAmtMilk("1");
 		recipe1.setAmtSugar("1");
 		recipe1.setPrice("50");
-		
+
 		//Set up for r2
 		recipe2 = new Recipe();
 		recipe2.setName("Mocha");
@@ -71,7 +80,7 @@ public class TestSteps {
 		recipe2.setAmtMilk("1");
 		recipe2.setAmtSugar("1");
 		recipe2.setPrice("75");
-		
+
 		//Set up for r3
 		recipe3 = new Recipe();
 		recipe3.setName("Latte");
@@ -80,7 +89,7 @@ public class TestSteps {
 		recipe3.setAmtMilk("3");
 		recipe3.setAmtSugar("1");
 		recipe3.setPrice("100");
-		
+
 		//Set up for r4
 		recipe4 = new Recipe();
 		recipe4.setName("Hot Chocolate");
@@ -89,7 +98,7 @@ public class TestSteps {
 		recipe4.setAmtMilk("1");
 		recipe4.setAmtSugar("1");
 		recipe4.setPrice("65");
-		
+
 		//Set up for r5 (added by MWW)
 		recipe5 = new Recipe();
 		recipe5.setName("Super Hot Chocolate");
@@ -105,5 +114,5 @@ public class TestSteps {
 		recipeBook.addRecipe(recipe4);
 		
 	}
-    
+*/
 }
