@@ -43,7 +43,9 @@ Scenario: Add a Recipe
       see whether the coffee maker returns to the Waiting state.  
       
    Given an empty recipe book
-   # add more here!   
+    Then service of the coffee maker to use add recipe
+    And add the recipe
+
    
 Scenario: Delete a Recipe
       Priority: 2 Story Points: 1

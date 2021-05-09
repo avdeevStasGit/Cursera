@@ -16,11 +16,18 @@
  * 
  */
 package edu.ncsu.csc326.coffeemaker;
+import static edu.ncsu.csc326.coffeemaker.CoffeeMakerUI.Mode.ADD_RECIPE;
+import static edu.ncsu.csc326.coffeemaker.CoffeeMakerUI.Mode.WAITING;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import edu.ncsu.csc326.coffeemaker.CoffeeMaker;
+import edu.ncsu.csc326.coffeemaker.UICmd.ChooseRecipe;
+import edu.ncsu.csc326.coffeemaker.UICmd.ChooseService;
+import edu.ncsu.csc326.coffeemaker.UICmd.DescribeRecipe;
 
 /**
  * Contains the step definitions for the cucumber tests.  This parses the 
@@ -44,14 +51,37 @@ public class TestSteps {
 		coffeeMaker = new CoffeeMaker(recipeBook, testInventory);
 		coffeeMakerMain = new CoffeeMakerUI(coffeeMaker);
 	}
-	
+
+
+	//Add a Recipe -------------------------------
     @Given("^an empty recipe book$")
     public void an_empty_recipe_book() throws Throwable {
         initialize();
-
+        assertEquals(CoffeeMakerUI.Mode.WAITING,coffeeMakerMain.getMode());
 
     }
+    @Then("^service of the coffee maker to use add recipe$")
+	public void service_of_the_coffee_maker_to_use_Add_Recipe() throws Throwable {
+		ChooseService chooseService = new ChooseService(1);
+		coffeeMakerMain.UI_Input(chooseService);
+		assertEquals(ADD_RECIPE,coffeeMakerMain.getMode());
+		assertEquals(CoffeeMakerUI.Status.OK,coffeeMakerMain.getStatus());
+	}
 
+	@And("^add the recipe$")
+	public void add_The_Recipe() throws Throwable {
+		//coffeeMakerMain.coffeeMaker.addRecipe(recipe1);
+		DescribeRecipe describeRecipe = new DescribeRecipe(recipe1);
+		assertEquals(WAITING, coffeeMakerMain.getMode());
+	}
+
+	@And("^choose a recipe$")
+	public void choose_A_recipe() throws Throwable {
+		ChooseRecipe chooseRecipe = new ChooseRecipe(0);
+		assertEquals(WAITING, coffeeMakerMain.getMode());
+	}
+
+	//End Add a Recipe--------------------------------------------
 
     @Given("a default recipe book")
 	public void a_default_recipe_book() throws Throwable {
