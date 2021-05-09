@@ -14,40 +14,29 @@ after running the user story:
   - Is the change produced correct?
   - etc.
 
-Scenario: Waiting State
+Scenario: Flow of Events for the Waiting
       Priority: 1 Story Points: 2
-      If the Coffee Maker is not in use it waits for user input. There are six different
-      options of user input: 1) add recipe, 2) delete a recipe, 3) edit a recipe,
+      If the Coffee Maker is not in use it waits for user input. There are six different 
+      options of user input: 1) add recipe, 2) delete a recipe, 3) edit a recipe, 
       4) add inventory, 5) check inventory, and 6) purchase beverage.
-
-      For this scenario, what we will do is try each of the six user inputs and make sure
+      
+      For this scenario, what we will do is try each of the six user inputs and make sure 
       that the coffee maker ends up in the appropriate mode.  This would be a good place
       for a scenario outline with a table that described user inputs and expected final states.
-
-      You might also want to try a couple of exceptional values to see what the
+      
+      You might also want to try a couple of exceptional values to see what the 
       Coffee Maker does.
+
   Given Run CoffeeMaker
-  When Enter: 0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  Then Available services in the main menu
+    |1. Add a recipe|
+    |2. Delete a recipe|
+    |3. Edit a recipe|
+    |4. Add inventory|
+    |5. Check inventory|
+    |6. Purchase coffee|
+    |7. Insert money|
+    |0. Exit|
 
 
 

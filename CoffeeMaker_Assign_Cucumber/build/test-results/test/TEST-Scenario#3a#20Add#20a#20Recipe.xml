@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Scenario: Add a Recipe" tests="2" skipped="0" failures="2" errors="0" timestamp="2021-05-08T06:39:26" hostname="idea-PC" time="0.01">
+<testsuite name="Scenario: Add a Recipe" tests="2" skipped="0" failures="2" errors="0" timestamp="2021-05-08T13:13:37" hostname="idea-PC" time="0.0">
   <properties/>
-  <testcase name="Given an empty recipe book" classname="Scenario: Add a Recipe" time="0.009">
+  <testcase name="Given an empty recipe book" classname="Scenario: Add a Recipe" time="0.0">
     <failure message="cucumber.api.PendingException: TODO: implement me" type="cucumber.api.PendingException">cucumber.api.PendingException: TODO: implement me
 	at cucumber.runtime.junit.JUnitReporter.addFailure(JUnitReporter.java:150)
 	at cucumber.runtime.junit.JUnitReporter.addFailureOrIgnoreStep(JUnitReporter.java:138)
@@ -60,7 +60,7 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="classMethod" classname="Scenario: Add a Recipe" time="0.013">
+  <testcase name="classMethod" classname="Scenario: Add a Recipe" time="0.001">
     <failure message="cucumber.api.PendingException: TODO: implement me" type="cucumber.api.PendingException">cucumber.api.PendingException: TODO: implement me
 	at cucumber.runtime.junit.JUnitReporter.addFailure(JUnitReporter.java:150)
 	at cucumber.runtime.junit.JUnitReporter.addFailureOrIgnoreStep(JUnitReporter.java:138)

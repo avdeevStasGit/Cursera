@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Scenario: Delete a Recipe" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-05-08T06:39:26" hostname="idea-PC" time="0.001">
+<testsuite name="Scenario: Delete a Recipe" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-05-08T13:13:37" hostname="idea-PC" time="0.0">
   <properties/>
   <testcase name="Given a default recipe book" classname="Scenario: Delete a Recipe" time="0.0"/>
   <testcase name="classMethod" classname="Scenario: Delete a Recipe" time="0.002"/>
