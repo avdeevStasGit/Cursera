@@ -57,6 +57,7 @@ public class TestSteps {
     @Given("^an empty recipe book$")
     public void an_empty_recipe_book() throws Throwable {
         initialize();
+
         assertEquals(CoffeeMakerUI.Mode.WAITING,coffeeMakerMain.getMode());
 
     }
@@ -64,6 +65,7 @@ public class TestSteps {
 	public void service_of_the_coffee_maker_to_use_Add_Recipe() throws Throwable {
 		ChooseService chooseService = new ChooseService(1);
 		coffeeMakerMain.UI_Input(chooseService);
+
 		assertEquals(ADD_RECIPE,coffeeMakerMain.getMode());
 		assertEquals(CoffeeMakerUI.Status.OK,coffeeMakerMain.getStatus());
 	}
@@ -72,12 +74,14 @@ public class TestSteps {
 	public void add_The_Recipe() throws Throwable {
 		//coffeeMakerMain.coffeeMaker.addRecipe(recipe1);
 		DescribeRecipe describeRecipe = new DescribeRecipe(recipe1);
+
 		assertEquals(WAITING, coffeeMakerMain.getMode());
 	}
 
 	@And("^choose a recipe$")
 	public void choose_A_recipe() throws Throwable {
 		ChooseRecipe chooseRecipe = new ChooseRecipe(0);
+
 		assertEquals(WAITING, coffeeMakerMain.getMode());
 	}
 
