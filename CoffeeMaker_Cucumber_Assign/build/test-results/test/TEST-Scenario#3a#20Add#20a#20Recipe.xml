@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Scenario: Add a Recipe" tests="4" skipped="0" failures="2" errors="0" timestamp="2021-05-11T04:49:37" hostname="idea-PC" time="0.053">
+  <properties/>
+  <testcase name="Given coffee machine included with blank recipe book" classname="Scenario: Add a Recipe" time="0.001"/>
+  <testcase name="Then click the service add a recipe" classname="Scenario: Add a Recipe" time="0.001"/>
+  <testcase name="And add the recipe" classname="Scenario: Add a Recipe" time="0.006">
+    <failure message="java.lang.AssertionError: expected:&lt;WAITING&gt; but was:&lt;ADD_RECIPE&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;WAITING&gt; but was:&lt;ADD_RECIPE&gt;
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:834)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at edu.ncsu.csc326.coffeemaker.TestSteps.add_The_Recipe(TestSteps.java:94)
+	at ✽.And add the recipe(edu/ncsu/csc326/coffeemaker/CoffeeMaker.feature:47)
+</failure>
+  </testcase>
+  <testcase name="classMethod" classname="Scenario: Add a Recipe" time="0.061">
+    <failure message="java.lang.AssertionError: expected:&lt;WAITING&gt; but was:&lt;ADD_RECIPE&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;WAITING&gt; but was:&lt;ADD_RECIPE&gt;
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:834)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at edu.ncsu.csc326.coffeemaker.TestSteps.add_The_Recipe(TestSteps.java:94)
+	at ✽.And add the recipe(edu/ncsu/csc326/coffeemaker/CoffeeMaker.feature:47)
+</failure>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

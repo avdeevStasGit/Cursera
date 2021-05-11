@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="edu.ncsu.csc326.coffeemaker.RunCukesTest" tests="0" skipped="0" failures="0" errors="0" timestamp="1970-01-01T00:00:00" hostname="idea-PC" time="0.0">
+  <properties/>
+  <system-out><![CDATA[
+?[31mFailed scenarios:?[0m
+?[31medu/ncsu/csc326/coffeemaker/CoffeeMaker.feature:33 ?[0m# Scenario: Add a Recipe
+
+7 Scenarios (?[31m1 failed?[0m, ?[32m6 passed?[0m)
+9 Steps (?[31m1 failed?[0m, ?[32m8 passed?[0m)
+0m0,535s
+
+java.lang.AssertionError: expected:<WAITING> but was:<ADD_RECIPE>
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.junit.Assert.failNotEquals(Assert.java:834)
+	at org.junit.Assert.assertEquals(Assert.java:118)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at edu.ncsu.csc326.coffeemaker.TestSteps.add_The_Recipe(TestSteps.java:94)
+	at ?.And add the recipe(edu/ncsu/csc326/coffeemaker/CoffeeMaker.feature:47)
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
